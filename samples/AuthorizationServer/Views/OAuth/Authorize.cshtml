@@ -1,0 +1,32 @@
+﻿@using Microsoft.AspNet.Http.Authentication
+@using Microsoft.AspNet.WebUtilities
+﻿@using System.Security.Claims
+@{
+    AuthenticationManager authentication = Context.Authentication;
+    ClaimsPrincipal principal = authentication.AuthenticateAsync("Application").Result;    
+    string[] scopes = QueryHelpers.ParseQuery(Context.Request.QueryString.Value)["scope"];
+}
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Authorize</title>
+</head>
+<body>
+    <h1>Authorization Server</h1>
+    <h2>OAuth2 Authorize</h2>
+    <form method="POST">
+        <p>Hello, @principal.Identity.Name</p>
+        <p>A third party application want to do the following on your behalf:</p>
+        <ul>
+            @foreach (var scope in scopes)
+            {
+                <li>@scope</li>
+            }
+        </ul>
+        <p>
+            <input type="submit" name="submit.Grant" value="Grant" />
+            <input type="submit" name="submit.Login" value="Sign in as different user" />
+        </p>
+    </form>
+</body>
+</html>

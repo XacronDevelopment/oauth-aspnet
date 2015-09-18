@@ -1,0 +1,20 @@
+﻿@using Microsoft.AspNet.Http
+﻿@using System
+@using System.Security.Claims
+@{
+    var error = Context.Items["oauth.Error"];
+    var errorDescription = Context.Items["oauth.ErrorDescription"];
+    var errorUri = Context.Items["oauth.ErrorUri"];
+}
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Authorize Error</title>
+</head>
+<body>
+    <h1>Katana.Sandbox.WebServer</h1>
+    <h2>OAuth2 Authorize Error</h2>
+    <p>Error: @error</p>
+    <p>@errorDescription</p>
+</body>
+</html>

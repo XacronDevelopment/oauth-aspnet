@@ -1,0 +1,6 @@
+﻿@using Microsoft.AspNet.WebUtilities
+
+<p>Your signin failed.</p>
+<p>
+    <a href="@QueryHelpers.ParseQuery(Context.Request.QueryString.Value)["ReturnUrl"][0]">Go Back</a>
+</p>

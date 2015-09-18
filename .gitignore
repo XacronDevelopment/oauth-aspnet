@@ -1,11 +1,13 @@
 [Oo]bj/
 [Bb]in/
 TestResults/
+.vs/
 .nuget/
 _ReSharper.*/
 packages/
 artifacts/
 PublishProfiles/
+*.vspscc
 *.user
 *.suo
 *.cache
