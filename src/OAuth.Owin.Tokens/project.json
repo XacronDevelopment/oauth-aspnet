@@ -1,0 +1,24 @@
+﻿{
+  "version": "1.0.0-beta7-0001",
+  "description": "ASP.NET 4.x Resource Server components for consuming OAuth tokens genetrated by an Authorization Server based on OAuth.AspNet.AuthServer",
+  "authors": ["Xacron Development"],
+  "tags": ["OAuth", "OAuth Tokens", "ASP.NET"],
+  "projectUrl": "https://github.com/XacronDevelopment/oauth-aspnet",
+  "licenseUrl": "http://opensource.org/licenses/apache2.0.php",
+
+  "dependencies": {
+    "Microsoft.Framework.NotNullAttribute.Internal": {
+      "type": "build",
+      "version": "1.0.0-*"
+    }
+  },
+
+  "frameworks": {
+    "net451": {
+      "dependencies": {
+        "Microsoft.AspNet.DataProtection.Extensions": "1.0.0-beta7",
+        "Microsoft.Owin.Security": "3.0.1"
+      }
+    }
+  }
+}
