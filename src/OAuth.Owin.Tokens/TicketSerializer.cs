@@ -1,4 +1,3 @@
-using Microsoft.Framework.Internal;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.DataHandler.Serializer;
 using System;
@@ -73,8 +72,14 @@ namespace OAuth.Owin.Tokens
             }
         }
 
-        public static void Write([NotNull] BinaryWriter writer, [NotNull] AuthenticationTicket model)
+        public static void Write(BinaryWriter writer, AuthenticationTicket model)
         {
+            if (writer == null)
+                throw new ArgumentNullException(nameof(writer));
+
+            if (model == null)
+                throw new ArgumentNullException(nameof(model));
+
             writer.Write(FormatVersion);
             writer.Write(model.Identity.AuthenticationType);
             var identity = model.Identity;
@@ -104,8 +109,11 @@ namespace OAuth.Owin.Tokens
             PropertiesSerializer.Write(writer, model.Properties);
         }
 
-        public static AuthenticationTicket Read([NotNull] BinaryReader reader)
+        public static AuthenticationTicket Read(BinaryReader reader)
         {
+            if (reader == null)
+                throw new ArgumentNullException(nameof(reader));
+
             if (reader.ReadInt32() != FormatVersion)
             {
                 return null;

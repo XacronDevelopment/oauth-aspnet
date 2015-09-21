@@ -10,7 +10,6 @@
     "Microsoft.AspNet.Mvc": "6.0.0-beta7",
     "Microsoft.AspNet.Server.IIS": "1.0.0-beta7",
     "Microsoft.AspNet.Server.WebListener": "1.0.0-beta7",
-    "Microsoft.Framework.NotNullAttribute.Sources": "1.0.0-beta7-10631",
     "OAuth.AspNet.AuthServer": "1.0.0-beta7-0001"
   },
 
