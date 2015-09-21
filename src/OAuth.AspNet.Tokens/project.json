@@ -1,5 +1,5 @@
 ﻿{
-  "version": "1.0.0-beta7-0001",
+  "version": "1.0.0-beta7-0002",
   "description": "Resource Server components for consuming OAuth tokens genetrated by an Authorization Server based on OAuth.AspNet.AuthServer",
   "authors": ["Xacron Development"],
   "tags": ["OAuth", "OAuth Tokens", "ASP.NET"],

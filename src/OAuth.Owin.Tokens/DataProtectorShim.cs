@@ -1,4 +1,4 @@
-using Microsoft.Framework.Internal;
+using System;
 
 namespace OAuth.Owin.Tokens
 {
@@ -10,8 +10,11 @@ namespace OAuth.Owin.Tokens
     {
         private readonly Microsoft.AspNet.DataProtection.IDataProtector _protector;
 
-        public DataProtectorShim([NotNull] Microsoft.AspNet.DataProtection.IDataProtector protector)
+        public DataProtectorShim(Microsoft.AspNet.DataProtection.IDataProtector protector)
         {
+            if (protector == null)
+                throw new ArgumentNullException(nameof(protector));
+
             _protector = protector;
         }
 
