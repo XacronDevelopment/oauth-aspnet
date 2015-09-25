@@ -19,9 +19,9 @@ namespace OAuth.AspNet.Tokens
         {
             if (dataProtectionProvider == null)
             {
-#if DNXCORE50
+               #if DNXCORE50
                 dataProtectionProvider = new DataProtectionProvider(new DirectoryInfo(Environment.GetEnvironmentVariable("Temp"))).CreateProtector("OAuth.AspNet.AuthServer");
-#else
+               #else
                 dataProtectionProvider = new DataProtectionProvider(new DirectoryInfo(Environment.GetEnvironmentVariable("Temp", EnvironmentVariableTarget.Machine))).CreateProtector("OAuth.AspNet.AuthServer");
                #endif
             }
@@ -29,9 +29,9 @@ namespace OAuth.AspNet.Tokens
             _ticketDataFormat = new TicketDataFormat(dataProtectionProvider.CreateProtector("Access_Token", "v1"));
         }
 
-#endregion
+        #endregion
 
-#region non-Public Members
+        #region non-Public Members
 
         private TicketDataFormat _ticketDataFormat;
 
@@ -39,9 +39,9 @@ namespace OAuth.AspNet.Tokens
 
         private int _maximumTokenSizeInBytes = TokenValidationParameters.DefaultMaximumTokenSizeInBytes;
 
-#endregion
+        #endregion
 
-#region Public Members
+        #region Public Members
 
         public bool CanValidateToken
         {
@@ -90,7 +90,7 @@ namespace OAuth.AspNet.Tokens
             return ticket?.Principal;
         }
 
-#endregion
+        #endregion
     }
 
 }

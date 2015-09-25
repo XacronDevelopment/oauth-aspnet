@@ -1,5 +1,5 @@
-﻿{
-  "version": "1.0.0-beta7-0002",
+{
+  "version": "1.0.0-beta8-0001",
   "description": "An ASP.NET 5 compatible port of the OAuth Authorization Server middleware from Microsoft's Project Katana.",
   "authors": ["Xacron Development"],
   "tags": ["OAuth", "ASP.NET", "Identity Server"],
@@ -7,11 +7,12 @@
   "licenseUrl": "http://opensource.org/licenses/apache2.0.php",
 
   "dependencies": {
-    "Microsoft.AspNet.Authentication": "1.0.0-beta7",
-    "Microsoft.AspNet.DataProtection": "1.0.0-beta7",
-    "Microsoft.AspNet.DataProtection.Extensions": "1.0.0-beta7",
-    "Microsoft.Framework.Logging": "1.0.0-beta7",
-    "Microsoft.Framework.Logging.Abstractions": "1.0.0-beta7",
+    "Microsoft.AspNet.Authentication": "1.0.0-beta8-15679",
+    "Microsoft.AspNet.DataProtection": "1.0.0-beta8-15615",
+    "Microsoft.AspNet.DataProtection.Extensions": "1.0.0-beta8-15615",
+    "Microsoft.AspNet.Http.Abstractions": "1.0.0-beta8-15630",
+    "Microsoft.Framework.Logging": "1.0.0-beta8-15615",
+    "Microsoft.Framework.Logging.Abstractions": "1.0.0-beta8-15615",
     "Newtonsoft.Json": "7.0.1"
   },
 

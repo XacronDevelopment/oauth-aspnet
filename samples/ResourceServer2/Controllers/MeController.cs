@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNet.Authentication.OAuthBearer;
-using Microsoft.AspNet.Authorization;
+﻿using Microsoft.AspNet.Authorization;
 using Microsoft.AspNet.Mvc;
 
 namespace ResourceServer2

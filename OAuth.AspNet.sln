@@ -39,6 +39,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ResourceOwnerPasswordCreden
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientCredentialsGrantClient1", "samples\ClientCredentialsGrantClient1\ClientCredentialsGrantClient1.csproj", "{B8E24D93-12DF-490F-BD03-7E2EFC641298}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OAuth.Owin.Tokens.Legacy", "samples\OAuth.Owin.Tokens.Legacy\OAuth.Owin.Tokens.Legacy.csproj", "{9AEA1A21-3A23-419E-82EF-CB873357C8F0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -97,6 +99,10 @@ Global
 		{B8E24D93-12DF-490F-BD03-7E2EFC641298}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B8E24D93-12DF-490F-BD03-7E2EFC641298}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B8E24D93-12DF-490F-BD03-7E2EFC641298}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9AEA1A21-3A23-419E-82EF-CB873357C8F0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9AEA1A21-3A23-419E-82EF-CB873357C8F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9AEA1A21-3A23-419E-82EF-CB873357C8F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9AEA1A21-3A23-419E-82EF-CB873357C8F0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -115,5 +121,6 @@ Global
 		{C2F7B815-0FB7-4E49-8F0B-01161F13C68D} = {8AEF4F7B-1A9E-4210-8202-6E074A15DA28}
 		{9C529397-FEF2-4217-8A87-0669D0B93A58} = {8AEF4F7B-1A9E-4210-8202-6E074A15DA28}
 		{B8E24D93-12DF-490F-BD03-7E2EFC641298} = {8AEF4F7B-1A9E-4210-8202-6E074A15DA28}
-	EndGlobalSection	
+		{9AEA1A21-3A23-419E-82EF-CB873357C8F0} = {8AEF4F7B-1A9E-4210-8202-6E074A15DA28}
+	EndGlobalSection
 EndGlobal

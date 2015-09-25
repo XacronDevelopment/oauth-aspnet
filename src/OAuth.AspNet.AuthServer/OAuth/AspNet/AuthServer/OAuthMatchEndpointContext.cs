@@ -7,7 +7,7 @@ namespace OAuth.AspNet.AuthServer
     /// <summary>
     /// Provides notification used for determining the OAuth flow type based on the request.
     /// </summary>
-    public class OAuthMatchEndpointNotification : BaseNotification<OAuthAuthorizationServerOptions>
+    public class OAuthMatchEndpointNotification : BaseControlContext<OAuthAuthorizationServerOptions>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="OAuthMatchEndpointNotification"/> class

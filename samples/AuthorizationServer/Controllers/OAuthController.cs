@@ -34,7 +34,7 @@ namespace AuthorizationServer.Controllers
 
             if (Request.QueryString.HasValue)
             {
-                IDictionary<string, string[]> queryStringComponents = QueryHelpers.ParseQuery(Request.QueryString.Value);
+                var queryStringComponents = QueryHelpers.ParseQuery(Request.QueryString.Value);
 
                 if (queryStringComponents.ContainsKey("scope"))
                     scopes = queryStringComponents["scope"];
@@ -42,7 +42,7 @@ namespace AuthorizationServer.Controllers
 
             if (Request.Method == "POST")
             {
-                if (!string.IsNullOrEmpty(Request.Form.Get("submit.Grant")))
+                if (!string.IsNullOrEmpty(Request.Form["submit.Grant"]))
                 {
                     principal = new ClaimsPrincipal(principal.Identities);
 
@@ -56,7 +56,7 @@ namespace AuthorizationServer.Controllers
                     await authentication.SignInAsync("Bearer", principal);
                 }
 
-                if (!string.IsNullOrEmpty(Request.Form.Get("submit.Login")))
+                if (!string.IsNullOrEmpty(Request.Form["submit.Login"]))
                 {
                     await authentication.SignOutAsync("Application");
 

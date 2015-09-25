@@ -13,35 +13,29 @@ namespace AuthorizationServer
     {        
         public void ConfigureServices(IServiceCollection services)
         {
-            services.ConfigureCookieAuthentication(
-                                                      options => {
-                                                                     options.AuthenticationScheme = "Application";
-                                                                     options.AutomaticAuthentication = false;
-                                                                     options.LoginPath = new PathString(Paths.LoginPath);
-                                                                     options.LogoutPath = new PathString(Paths.LogoutPath);
-                                                                 },
-                                                      "CookieMiddlewareOptions.Application"
-                                                  );
-
-            services.ConfigureCookieAuthentication(
-                                                      options => {
-                                                                     options.AuthenticationScheme = "External";
-                                                                     options.AutomaticAuthentication = false;
-                                                                     options.CookieName = CookieAuthenticationDefaults.CookiePrefix + options.AuthenticationScheme;
-                                                                     options.ExpireTimeSpan = TimeSpan.FromMinutes(5);
-                                                                 },
-                                                      "CookieMiddlewareOptions.External"
-                                                  );            
-
             services.AddMvc();
         }
 
         public void Configure(IApplicationBuilder app)
         {                                   
             // Enable Application Sign In Cookie
-            app.UseCookieAuthentication(optionsName: "CookieMiddlewareOptions.Application");
+            app.UseCookieAuthentication(
+                                           options => {
+                                                          options.AuthenticationScheme = "Application";
+                                                          options.AutomaticAuthentication = false;
+                                                          options.LoginPath = new PathString(Paths.LoginPath);
+                                                          options.LogoutPath = new PathString(Paths.LogoutPath);
+                                                      }
+                                       );
 
-            app.UseCookieAuthentication(optionsName: "CookieMiddlewareOptions.External");
+            app.UseCookieAuthentication(
+                                           options => {
+                                                          options.AuthenticationScheme = "External";
+                                                          options.AutomaticAuthentication = false;
+                                                          options.CookieName = CookieAuthenticationDefaults.CookiePrefix + options.AuthenticationScheme;
+                                                          options.ExpireTimeSpan = TimeSpan.FromMinutes(5);
+                                                      }
+                                       );
 
             // Enable google authentication
             app.UseGoogleAuthentication(

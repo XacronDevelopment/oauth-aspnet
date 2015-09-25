@@ -14,9 +14,9 @@ namespace Constants
         public const string ResourceServerBaseAddress = "http://localhost:62619";
 
         /// <summary>
-        /// ImplicitGrant project should be running on this specific port '38515'
+        /// ImplicitGrant project should be running on this URL
         /// </summary>
-        public const string ImplicitGrantCallBackPath = "http://localhost:38515/Home/SignIn";
+        public const string ImplicitGrantCallBackPath = "http://localhost:9581/Home/SignIn";
 
         /// <summary>
         /// AuthorizationCodeGrant project should be running on this URL.
