@@ -15,9 +15,9 @@ namespace AuthorizationServer.Controllers
 
             if (Request.Method == "POST")
             {
-                var isPersistent = !string.IsNullOrEmpty(Request.Form.Get("isPersistent"));
+                var isPersistent = !string.IsNullOrEmpty(Request.Form["isPersistent"]);
 
-                if (!string.IsNullOrEmpty(Request.Form.Get("submit.Signin")))
+                if (!string.IsNullOrEmpty(Request.Form["submit.Signin"]))
                 {
                     var authenticationPrincipal = new ClaimsPrincipal(new[] { new ClaimsIdentity(new[] { new Claim(ClaimsIdentity.DefaultNameClaimType, Request.Form["username"]) }, "Application") });
 
@@ -40,7 +40,7 @@ namespace AuthorizationServer.Controllers
             {
                 foreach (var key in Request.Form.Keys)
                 {
-                    if (key.StartsWith("submit.External.") && !string.IsNullOrEmpty(Request.Form.Get(key)))
+                    if (key.StartsWith("submit.External.") && !string.IsNullOrEmpty(Request.Form[key]))
                     {
                         var authType = key.Substring("submit.External.".Length);
 
@@ -69,7 +69,7 @@ namespace AuthorizationServer.Controllers
 
                 if (Request.QueryString.HasValue)
                 {
-                    IDictionary<string, string[]> queryStringComponents = QueryHelpers.ParseQuery(Request.QueryString.Value);
+                    var queryStringComponents = QueryHelpers.ParseQuery(Request.QueryString.Value);
 
                     if (queryStringComponents.ContainsKey("ReturnUrl"))
                         returnUrls = queryStringComponents["ReturnUrl"];

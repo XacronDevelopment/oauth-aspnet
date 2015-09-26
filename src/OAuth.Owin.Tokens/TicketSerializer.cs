@@ -12,7 +12,7 @@ namespace OAuth.Owin.Tokens
     {
         #region non-Public Members
 
-        private const int FormatVersion = 3;
+        private const int FormatVersion = 4;
 
         private static void WriteWithDefault(BinaryWriter writer, string value, string defaultValue)
         {
