@@ -35,10 +35,10 @@
     <form method="POST" action="/Account/External@(Context.Request.QueryString)">
         <h2>Third Party Login</h2>
         <ul>
-            @foreach (var description in authentication.GetAuthenticationSchemes().Where(d => !String.IsNullOrEmpty(d.Caption)))
+            @foreach (var description in authentication.GetAuthenticationSchemes().Where(d => !String.IsNullOrEmpty(d.DisplayName)))
             {
                 <li>
-                    <input type="submit" name="submit.External.@description.AuthenticationScheme" value="@description.Caption" />
+                    <input type="submit" name="submit.External.@description.AuthenticationScheme" value="@description.DisplayName" />
                 </li>
             }
         </ul>

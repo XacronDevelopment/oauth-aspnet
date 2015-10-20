@@ -12,13 +12,25 @@ namespace OAuth.Owin.Tokens
     {
         #region non-Public Members
 
-        private const int FormatVersion = 4;
+        private const string DefaultStringPlaceholder = "\0";
+
+        private const int FormatVersion = 5;
+
+        private static string ReadWithDefault(BinaryReader reader, string defaultValue)
+        {
+            var value = reader.ReadString();
+            if (string.Equals(value, DefaultStringPlaceholder, StringComparison.Ordinal))
+            {
+                return defaultValue;
+            }
+            return value;
+        }
 
         private static void WriteWithDefault(BinaryWriter writer, string value, string defaultValue)
         {
             if (string.Equals(value, defaultValue, StringComparison.Ordinal))
             {
-                writer.Write(DefaultValues.DefaultStringPlaceholder);
+                writer.Write(DefaultStringPlaceholder);
             }
             else
             {
@@ -26,36 +38,164 @@ namespace OAuth.Owin.Tokens
             }
         }
 
-        private static string ReadWithDefault(BinaryReader reader, string defaultValue)
+        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        private static void EnsureNotNull(object argument, string argumentName)
         {
-            var value = reader.ReadString();
-            if (string.Equals(value, DefaultValues.DefaultStringPlaceholder, StringComparison.Ordinal))
-            {
-                return defaultValue;
-            }
-            return value;
+            if (argument == null)
+                throw new ArgumentNullException(argumentName);
         }
 
-        private static class DefaultValues
+        protected virtual void WriteIdentity(BinaryWriter writer, ClaimsIdentity identity)
         {
-            public const string DefaultStringPlaceholder = "\0";
-            public const string NameClaimType = "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name";
-            public const string RoleClaimType = "http://schemas.microsoft.com/ws/2008/06/identity/claims/role";
-            public const string LocalAuthority = "LOCAL AUTHORITY";
-            public const string StringValueType = "http://www.w3.org/2001/XMLSchema#string";
+            EnsureNotNull(writer, nameof(writer));
+
+            EnsureNotNull(identity, nameof(identity));
+
+            var authenticationType = identity.AuthenticationType ?? string.Empty;
+
+            writer.Write(authenticationType);
+
+            WriteWithDefault(writer, identity.NameClaimType, ClaimsIdentity.DefaultNameClaimType);
+
+            WriteWithDefault(writer, identity.RoleClaimType, ClaimsIdentity.DefaultRoleClaimType);
+
+            // Write the number of claims contained in the identity.
+            writer.Write(identity.Claims.Count());
+
+            foreach (var claim in identity.Claims)
+            {
+                WriteClaim(writer, claim);
+            }
+
+            var bootstrap = identity.BootstrapContext as string;
+            if (!string.IsNullOrEmpty(bootstrap))
+            {
+                writer.Write(true);
+                writer.Write(bootstrap);
+            }
+            else
+            {
+                writer.Write(false);
+            }
+
+            if (identity.Actor != null)
+            {
+                writer.Write(true);
+                WriteIdentity(writer, identity.Actor);
+            }
+            else
+            {
+                writer.Write(false);
+            }
+        }
+
+        protected virtual void WriteClaim(BinaryWriter writer, Claim claim)
+        {
+            EnsureNotNull(writer, nameof(writer));
+
+            EnsureNotNull(claim, nameof(claim));
+
+            WriteWithDefault(writer, claim.Type, claim.Subject?.NameClaimType ?? ClaimsIdentity.DefaultNameClaimType);
+
+            writer.Write(claim.Value);
+
+            WriteWithDefault(writer, claim.ValueType, ClaimValueTypes.String);
+
+            WriteWithDefault(writer, claim.Issuer, ClaimsIdentity.DefaultIssuer);
+
+            WriteWithDefault(writer, claim.OriginalIssuer, claim.Issuer);
+
+            // Write the number of properties contained in the claim.
+            writer.Write(claim.Properties.Count);
+
+            foreach (var property in claim.Properties)
+            {
+                writer.Write(property.Key ?? string.Empty);
+                writer.Write(property.Value ?? string.Empty);
+            }
+        }
+
+        protected virtual ClaimsIdentity ReadIdentity(BinaryReader reader)
+        {
+            EnsureNotNull(reader, nameof(reader));
+
+            var authenticationType = reader.ReadString();
+
+            var nameClaimType = ReadWithDefault(reader, ClaimsIdentity.DefaultNameClaimType);
+
+            var roleClaimType = ReadWithDefault(reader, ClaimsIdentity.DefaultRoleClaimType);
+
+            // Read the number of claims contained
+            // in the serialized identity.
+            var count = reader.ReadInt32();
+
+            var identity = new ClaimsIdentity(authenticationType, nameClaimType, roleClaimType);
+
+            for (int index = 0; index != count; ++index)
+            {
+                var claim = ReadClaim(reader, identity);
+
+                identity.AddClaim(claim);
+            }
+
+            // Determine whether the identity
+            // has a bootstrap context attached.
+            if (reader.ReadBoolean())
+            {
+                identity.BootstrapContext = reader.ReadString();
+            }
+
+            // Determine whether the identity
+            // has an actor identity attached.
+            if (reader.ReadBoolean())
+            {
+                identity.Actor = ReadIdentity(reader);
+            }
+
+            return identity;
+        }
+
+        protected virtual Claim ReadClaim(BinaryReader reader, ClaimsIdentity identity)
+        {
+            EnsureNotNull(reader, nameof(reader));
+
+            EnsureNotNull(identity, nameof(identity));
+
+            var type = ReadWithDefault(reader, identity.NameClaimType);
+            var value = reader.ReadString();
+            var valueType = ReadWithDefault(reader, ClaimValueTypes.String);
+            var issuer = ReadWithDefault(reader, ClaimsIdentity.DefaultIssuer);
+            var originalIssuer = ReadWithDefault(reader, issuer);
+
+            var claim = new Claim(type, value, valueType, issuer, originalIssuer, identity);
+
+            // Read the number of properties stored in the claim.
+            var count = reader.ReadInt32();
+
+            for (var index = 0; index != count; ++index)
+            {
+                var key = reader.ReadString();
+                var propertyValue = reader.ReadString();
+
+                claim.Properties.Add(key, propertyValue);
+            }
+
+            return claim;
         }
 
         #endregion
 
         #region Public Members
 
-        public virtual byte[] Serialize(AuthenticationTicket model)
+        public static TicketSerializer Default { get; } = new TicketSerializer();
+
+        public virtual byte[] Serialize(AuthenticationTicket ticket)
         {
             using (var memory = new MemoryStream())
             {
                 using (var writer = new BinaryWriter(memory))
                 {
-                    Write(writer, model);
+                    Write(writer, ticket);
                 }
                 return memory.ToArray();
             }
@@ -72,77 +212,48 @@ namespace OAuth.Owin.Tokens
             }
         }
 
-        public static void Write(BinaryWriter writer, AuthenticationTicket model)
+        public virtual void Write(BinaryWriter writer, AuthenticationTicket ticket)
         {
-            if (writer == null)
-                throw new ArgumentNullException(nameof(writer));
+            EnsureNotNull(writer, nameof(writer));
 
-            if (model == null)
-                throw new ArgumentNullException(nameof(model));
+            EnsureNotNull(ticket, nameof(ticket));
 
             writer.Write(FormatVersion);
-            writer.Write(model.Identity.AuthenticationType);
-            var identity = model.Identity;
+
+            writer.Write(ticket.Identity.AuthenticationType);
+
+            var identity = ticket.Identity;
             if (identity == null)
-            {
-                throw new ArgumentNullException(nameof(model.Identity));
-            }
-            else
-            {
-                writer.Write(1);
-                var authenticationType = string.IsNullOrEmpty(identity.AuthenticationType) ? string.Empty : identity.AuthenticationType;
-                writer.Write(authenticationType);
-                WriteWithDefault(writer, identity.NameClaimType, DefaultValues.NameClaimType);
-                WriteWithDefault(writer, identity.RoleClaimType, DefaultValues.RoleClaimType);
-                writer.Write(identity.Claims.Count());
+                throw new ArgumentNullException(nameof(ticket.Identity));
 
-                foreach (var claim in identity.Claims)
-                {
-                    WriteWithDefault(writer, claim.Type, identity.NameClaimType);
-                    writer.Write(claim.Value);
-                    WriteWithDefault(writer, claim.ValueType, DefaultValues.StringValueType);
-                    WriteWithDefault(writer, claim.Issuer, DefaultValues.LocalAuthority);
-                    WriteWithDefault(writer, claim.OriginalIssuer, claim.Issuer);
-                }
-            }
+            // Only 1 identity possible.
+            writer.Write(1);
 
-            PropertiesSerializer.Write(writer, model.Properties);
+            WriteIdentity(writer, identity);
+
+            PropertiesSerializer.Write(writer, ticket.Properties);
         }
 
-        public static AuthenticationTicket Read(BinaryReader reader)
+        public virtual AuthenticationTicket Read(BinaryReader reader)
         {
-            if (reader == null)
-                throw new ArgumentNullException(nameof(reader));
+            EnsureNotNull(reader, nameof(reader));
 
             if (reader.ReadInt32() != FormatVersion)
             {
                 return null;
             }
-            var authenticationScheme = reader.ReadString();
-            var identityCount = reader.ReadInt32();
 
-            if (identityCount < 0)
+            var scheme = reader.ReadString();
+
+            // Read the number of identities stored
+            // in the serialized payload.
+            var count = reader.ReadInt32();
+            if (count < 0)
             {
                 return null;
             }
 
-            var authenticationType = reader.ReadString();
-            var nameClaimType = ReadWithDefault(reader, DefaultValues.NameClaimType);
-            var roleClaimType = ReadWithDefault(reader, DefaultValues.RoleClaimType);
-            var count = reader.ReadInt32();
-            var claims = new Claim[count];
-            for (int index = 0; index != count; ++index)
-            {
-                var type = ReadWithDefault(reader, nameClaimType);
-                var value = reader.ReadString();
-                var valueType = ReadWithDefault(reader, DefaultValues.StringValueType);
-                var issuer = ReadWithDefault(reader, DefaultValues.LocalAuthority);
-                var originalIssuer = ReadWithDefault(reader, issuer);
-                claims[index] = new Claim(type, value, valueType, issuer, originalIssuer);
-            }
-
-            var identity = new ClaimsIdentity(claims, authenticationType, nameClaimType, roleClaimType);
-
+            ClaimsIdentity identity = ReadIdentity(reader);
 
             var properties = PropertiesSerializer.Read(reader);
 

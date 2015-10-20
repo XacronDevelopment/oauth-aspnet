@@ -4,15 +4,16 @@
 
   "dependencies": {
     "Constants": "1.0.0-*",
-    "Microsoft.AspNet.Authentication.Cookies": "1.0.0-beta8-15679",
-    "Microsoft.AspNet.Authentication.Google": "1.0.0-beta8-15679",
-    "Microsoft.AspNet.Mvc": "6.0.0-beta8-15875",
-    "Microsoft.AspNet.Server.WebListener": "1.0.0-beta8-15656",
+    "Microsoft.AspNet.Authentication.Cookies": "1.0.0-beta8",
+    "Microsoft.AspNet.Authentication.Google": "1.0.0-beta8",
+    "Microsoft.AspNet.IISPlatformHandler": "1.0.0-beta8",
+    "Microsoft.AspNet.Mvc": "6.0.0-beta8",
+    "Microsoft.AspNet.Server.Kestrel": "1.0.0-beta8",
     "OAuth.AspNet.AuthServer": "1.0.0-beta8-0001"
   },
 
     "commands": {
-        "web": "Microsoft.AspNet.Hosting --server Microsoft.AspNet.Server.WebListener --server.urls http://localhost:11625"
+      "web": "Microsoft.AspNet.Server.Kestrel"
     },
 
     "frameworks": {

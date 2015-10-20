@@ -17,7 +17,9 @@ namespace AuthorizationServer
         }
 
         public void Configure(IApplicationBuilder app)
-        {                                   
+        {
+            app.UseIISPlatformHandler();
+
             // Enable Application Sign In Cookie
             app.UseCookieAuthentication(
                                            options => {

@@ -11,7 +11,7 @@ namespace OAuth.AspNet.AuthServer
     /// <summary>
     /// Provides context information used when processing an OAuth token request.
     /// </summary>
-    public class OAuthTokenEndpointContext : EndpointContext<OAuthAuthorizationServerOptions>
+    public class OAuthTokenEndpointContext : BaseContext<OAuthAuthorizationServerOptions>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="OAuthTokenEndpointContext"/> class
