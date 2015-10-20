@@ -1,14 +1,15 @@
 {
-  "version": "1.0.0-alpha8-0001",
+  "version": "1.0.0-beta8-0001",
   "description": "Resource Server components for consuming OAuth tokens genetrated by an Authorization Server based on OAuth.AspNet.AuthServer",
   "authors": ["Xacron Development"],
-  "tags": ["OAuth", "OAuth Tokens", "ASP.NET"],
+  "tags": ["OAuth", "Tokens", "ASP.NET"],
   "projectUrl": "https://github.com/XacronDevelopment/oauth-aspnet",
   "licenseUrl": "http://opensource.org/licenses/apache2.0.php",
+  "requireLicenseAcceptance": true,
 
   "dependencies": {
-    "Microsoft.AspNet.Authentication": "1.0.0-beta8-15679",
-    "Microsoft.AspNet.DataProtection.Extensions": "1.0.0-beta8-15615",
+    "Microsoft.AspNet.Authentication": "1.0.0-beta8",
+    "Microsoft.AspNet.DataProtection.Extensions": "1.0.0-beta8",
     "System.IdentityModel.Tokens": "5.0.0-beta4-03310920"
   },
 

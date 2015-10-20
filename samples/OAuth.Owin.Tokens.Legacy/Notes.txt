@@ -1,1 +1,1 @@
-﻿This project is a workout for VS tooling not yet being able to add a reference to a csproj to an xproj
+﻿This project is a workout for VS tooling not yet being able to add a reference to an xproj from csproj

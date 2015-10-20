@@ -3,14 +3,15 @@
   "version": "1.0.0-*",
 
   "dependencies": {
-    "Microsoft.AspNet.Authentication.JwtBearer": "1.0.0-beta8-15679",
-    "Microsoft.AspNet.Mvc": "6.0.0-beta8-15875",
-    "Microsoft.AspNet.Server.WebListener": "1.0.0-beta8-15656",
+    "Microsoft.AspNet.Authentication.JwtBearer": "1.0.0-beta8",
+    "Microsoft.AspNet.IISPlatformHandler": "1.0.0-beta8",
+    "Microsoft.AspNet.Mvc": "6.0.0-beta8",
+    "Microsoft.AspNet.Server.Kestrel": "1.0.0-beta8",
     "OAuth.AspNet.Tokens": "1.0.0-beta8-0001"
   },
 
   "commands": {
-    "web": "Microsoft.AspNet.Hosting --server Microsoft.AspNet.Server.WebListener --server.urls http://localhost:62619"
+    "web": "Microsoft.AspNet.Server.Kestrel"
   },
 
   "frameworks": {

@@ -15,6 +15,8 @@ namespace ResourceServer2
 
         public void Configure(IApplicationBuilder app)
         {
+            app.UseIISPlatformHandler();
+
             app.UseJwtBearerAuthentication(
                                                 options =>
                                                 {
