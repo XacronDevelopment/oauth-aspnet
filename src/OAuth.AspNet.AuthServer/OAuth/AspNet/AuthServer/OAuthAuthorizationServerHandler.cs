@@ -73,19 +73,19 @@ namespace OAuth.AspNet.AuthServer
 
             Response.StatusCode = 400;
             Response.ContentType = "application/json;charset=UTF-8";
-            Response.Headers.Set("Cache-Control", "no-cache");
-            Response.Headers.Set("Pragma", "no-cache");
-            Response.Headers.Set("Expires", "-1");
-            Response.Headers.Set("Content-Length", body.Length.ToString(CultureInfo.InvariantCulture));
+            Response.Headers["Cache-Control"] = "no-cache";
+            Response.Headers["Pragma"] = "no-cache";
+            Response.Headers["Expires"] = "-1";
+            Response.Headers["Content-Length"] = body.Length.ToString(CultureInfo.InvariantCulture);
             return Response.WriteAsync(body, Context.RequestAborted);
         }
 
         private async Task<bool> SendErrorPageAsync(string error, string errorDescription, string errorUri)
         {
             Response.StatusCode = 400;
-            Response.Headers.Set("Cache-Control", "no-cache");
-            Response.Headers.Set("Pragma", "no-cache");
-            Response.Headers.Set("Expires", "-1");
+            Response.Headers["Cache-Control"] = "no-cache";
+            Response.Headers["Pragma"] = "no-cache";
+            Response.Headers["Expires"] = "-1";
 
             if (Options.ApplicationCanDisplayErrors)
             {
@@ -115,7 +115,7 @@ namespace OAuth.AspNet.AuthServer
             }
 
             Response.ContentType = "text/plain;charset=UTF-8";
-            Response.Headers.Set("Content-Length", body.Length.ToString(CultureInfo.InvariantCulture));
+            Response.Headers["Content-Length"] = body.Length.ToString(CultureInfo.InvariantCulture);
             await Response.WriteAsync(body, Context.RequestAborted);
             // request is handled, does not pass on to application
             return true;
@@ -574,9 +574,9 @@ namespace OAuth.AspNet.AuthServer
                     body = Encoding.UTF8.GetString(stream.ToArray());
 
                     Response.ContentType = "application/json;charset=UTF-8";
-                    Response.Headers.Set("Cache-Control", "no-cache");
-                    Response.Headers.Set("Pragma", "no-cache");
-                    Response.Headers.Set("Expires", "-1");
+                    Response.Headers["Cache-Control"] = "no-cache";
+                    Response.Headers["Pragma"] = "no-cache";
+                    Response.Headers["Expires"] = "-1";
                     Response.ContentLength = Encoding.UTF8.GetByteCount(body);
                 }
             }

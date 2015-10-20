@@ -26,7 +26,7 @@ namespace OAuth.AspNet.AuthServer
 
             foreach (var parameter in parameters)
             {
-                AddParameter(parameter.Key, parameters.Get(parameter.Key));
+                AddParameter(parameter.Key, parameters[parameter.Key]);
             }
         }
 

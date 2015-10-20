@@ -49,7 +49,7 @@ namespace OAuth.AspNet.AuthServer
         {
             // Client Authentication http://tools.ietf.org/html/rfc6749#section-2.3
             // Client Authentication Password http://tools.ietf.org/html/rfc6749#section-2.3.1
-            string authorization = Request.Headers.Get("Authorization");
+            string authorization = Request.Headers["Authorization"];
             if (!string.IsNullOrWhiteSpace(authorization) && authorization.StartsWith("Basic ", StringComparison.OrdinalIgnoreCase))
             {
                 try
@@ -89,10 +89,10 @@ namespace OAuth.AspNet.AuthServer
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "0#", Justification = "Optimized for usage")]
         public bool TryGetFormCredentials(out string clientId, out string clientSecret)
         {
-            clientId = Parameters.Get(Constants.Parameters.ClientId);
+            clientId = Parameters[Constants.Parameters.ClientId];
             if (!string.IsNullOrEmpty(clientId))
             {
-                clientSecret = Parameters.Get(Constants.Parameters.ClientSecret);
+                clientSecret = Parameters[Constants.Parameters.ClientSecret];
                 ClientId = clientId;
                 return true;
             }

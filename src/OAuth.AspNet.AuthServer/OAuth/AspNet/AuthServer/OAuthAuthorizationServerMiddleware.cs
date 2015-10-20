@@ -2,7 +2,6 @@
 using Microsoft.AspNet.Builder;
 using Microsoft.AspNet.DataProtection;
 using Microsoft.Framework.Logging;
-using Microsoft.Framework.OptionsModel;
 using Microsoft.Framework.WebEncoders;
 using System;
 using System.IO;
@@ -22,7 +21,7 @@ namespace OAuth.AspNet.AuthServer
         /// called by application code directly, instead it is added by calling the the IAppBuilder UseOAuthAuthorizationServer 
         /// extension method.
         /// </summary>
-        public OAuthAuthorizationServerMiddleware(RequestDelegate next, IDataProtectionProvider dataProtectionProvider, ILoggerFactory loggerFactory, IUrlEncoder encoder, IOptions<OAuthAuthorizationServerOptions> options, ConfigureOptions<OAuthAuthorizationServerOptions> configureOptions) : base(next, options, loggerFactory, encoder, configureOptions)
+        public OAuthAuthorizationServerMiddleware(RequestDelegate next, OAuthAuthorizationServerOptions options, ILoggerFactory loggerFactory, IDataProtectionProvider dataProtectionProvider, IUrlEncoder encoder) : base(next, options, loggerFactory, encoder)
         {
             if (Options.Provider == null)
             {

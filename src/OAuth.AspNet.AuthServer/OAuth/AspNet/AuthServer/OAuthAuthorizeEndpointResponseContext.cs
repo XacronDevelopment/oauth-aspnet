@@ -11,7 +11,7 @@ namespace OAuth.AspNet.AuthServer
     /// <summary>
     /// Provides context information when processing an Authorization Response
     /// </summary>
-    public class OAuthAuthorizationEndpointResponseContext : EndpointContext<OAuthAuthorizationServerOptions>
+    public class OAuthAuthorizationEndpointResponseContext : BaseContext<OAuthAuthorizationServerOptions>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="OAuthAuthorizationEndpointResponseContext"/> class

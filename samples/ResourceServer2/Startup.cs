@@ -1,8 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.AspNet.Authentication.JwtBearer;
 using Microsoft.AspNet.Builder;
 using Microsoft.Framework.DependencyInjection;
-using Microsoft.AspNet.Authentication.OAuthBearer;
-using System.IdentityModel.Tokens;
 using OAuth.AspNet.Tokens;
 
 namespace ResourceServer2
@@ -17,12 +15,15 @@ namespace ResourceServer2
 
         public void Configure(IApplicationBuilder app)
         {
-            app.UseOAuthBearerAuthentication(
+            app.UseIISPlatformHandler();
+
+            app.UseJwtBearerAuthentication(
                                                 options =>
                                                 {
-                                                    options.AuthenticationScheme = OAuthBearerAuthenticationDefaults.AuthenticationScheme;
+                                                    options.AuthenticationScheme = JwtBearerDefaults.AuthenticationScheme;
                                                     options.AutomaticAuthentication = true;
-                                                    options.SecurityTokenValidators = new List<ISecurityTokenValidator>() { new TicketDataFormatTokenValidator() };
+                                                    options.SecurityTokenValidators.Clear();
+                                                    options.SecurityTokenValidators.Add(new TicketDataFormatTokenValidator());
                                                 }
                                             );
 

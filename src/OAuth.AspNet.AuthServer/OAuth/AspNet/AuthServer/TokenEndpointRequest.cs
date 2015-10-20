@@ -20,41 +20,39 @@ namespace OAuth.AspNet.AuthServer
                 throw new ArgumentNullException("parameters");
             }
 
-            Func<string, string> getParameter = parameters.Get;
-
             Parameters = parameters;
-            GrantType = getParameter(Constants.Parameters.GrantType);
-            ClientId = getParameter(Constants.Parameters.ClientId);
+            GrantType = parameters[Constants.Parameters.GrantType];
+            ClientId = parameters[Constants.Parameters.ClientId];
             if (string.Equals(GrantType, Constants.GrantTypes.AuthorizationCode, StringComparison.Ordinal))
             {
                 AuthorizationCodeGrant = new TokenEndpointRequestAuthorizationCode
                 {
-                    Code = getParameter(Constants.Parameters.Code),
-                    RedirectUri = getParameter(Constants.Parameters.RedirectUri),
+                    Code = parameters[Constants.Parameters.Code],
+                    RedirectUri = parameters[Constants.Parameters.RedirectUri],
                 };
             }
             else if (string.Equals(GrantType, Constants.GrantTypes.ClientCredentials, StringComparison.Ordinal))
             {
                 ClientCredentialsGrant = new TokenEndpointRequestClientCredentials
                 {
-                    Scope = (getParameter(Constants.Parameters.Scope) ?? string.Empty).Split(' ')
+                    Scope = ((string)parameters[Constants.Parameters.Scope] ?? string.Empty).Split(' ')
                 };
             }
             else if (string.Equals(GrantType, Constants.GrantTypes.RefreshToken, StringComparison.Ordinal))
             {
                 RefreshTokenGrant = new TokenEndpointRequestRefreshToken
                 {
-                    RefreshToken = getParameter(Constants.Parameters.RefreshToken),
-                    Scope = (getParameter(Constants.Parameters.Scope) ?? string.Empty).Split(' ')
+                    RefreshToken = parameters[Constants.Parameters.RefreshToken],
+                    Scope = ((string)parameters[Constants.Parameters.Scope] ?? string.Empty).Split(' ')
                 };
             }
             else if (string.Equals(GrantType, Constants.GrantTypes.Password, StringComparison.Ordinal))
             {
                 ResourceOwnerPasswordCredentialsGrant = new TokenEndpointRequestResourceOwnerPasswordCredentials
                 {
-                    UserName = getParameter(Constants.Parameters.Username),
-                    Password = getParameter(Constants.Parameters.Password),
-                    Scope = (getParameter(Constants.Parameters.Scope) ?? string.Empty).Split(' ')
+                    UserName = parameters[Constants.Parameters.Username],
+                    Password = parameters[Constants.Parameters.Password],
+                    Scope = ((string)parameters[Constants.Parameters.Scope] ?? string.Empty).Split(' ')
                 };
             }
             else if (!string.IsNullOrEmpty(GrantType))
