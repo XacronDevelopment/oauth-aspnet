@@ -1,16 +1,16 @@
-﻿using System;
+﻿using Microsoft.AspNet.Authentication;
+using Microsoft.AspNet.Http;
+using Microsoft.AspNet.Http.Authentication;
+using Microsoft.AspNet.Http.Features.Authentication;
+using Microsoft.AspNet.WebUtilities;
+using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Text;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Microsoft.AspNet.Authentication;
-using Microsoft.Framework.Logging;
-using Microsoft.AspNet.Http;
-using Microsoft.AspNet.WebUtilities;
-using Microsoft.AspNet.Http.Features.Authentication;
-using System.Collections.Generic;
-using Microsoft.AspNet.Http.Authentication;
 
 namespace OAuth.AspNet.AuthServer
 {

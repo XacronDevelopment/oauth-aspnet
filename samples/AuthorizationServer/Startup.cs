@@ -2,9 +2,9 @@
 using Microsoft.AspNet.Authentication.Cookies;
 using Microsoft.AspNet.Builder;
 using Microsoft.AspNet.Http;
-using Microsoft.Framework.DependencyInjection;
-using System;
+using Microsoft.Extensions.DependencyInjection;
 using OAuth.AspNet.AuthServer;
+using System;
 
 namespace AuthorizationServer
 {
