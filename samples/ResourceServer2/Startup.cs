@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNet.Authentication.JwtBearer;
 using Microsoft.AspNet.Builder;
-using Microsoft.Framework.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection;
 using OAuth.AspNet.Tokens;
 
 namespace ResourceServer2

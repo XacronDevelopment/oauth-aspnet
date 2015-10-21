@@ -3,11 +3,11 @@
   "version": "1.0.0-*",
 
   "dependencies": {
-    "Microsoft.AspNet.Authentication.JwtBearer": "1.0.0-beta8",
-    "Microsoft.AspNet.IISPlatformHandler": "1.0.0-beta8",
-    "Microsoft.AspNet.Mvc": "6.0.0-beta8",
-    "Microsoft.AspNet.Server.Kestrel": "1.0.0-beta8",
-    "OAuth.AspNet.Tokens": "1.0.0-beta8-0001"
+    "Microsoft.AspNet.Authentication.JwtBearer": "1.0.0-rc1-15760",
+    "Microsoft.AspNet.IISPlatformHandler": "1.0.0-rc1-15657",
+    "Microsoft.AspNet.Mvc": "6.0.0-rc1-16028",
+    "Microsoft.AspNet.Server.Kestrel": "1.0.0-rc1-15767",
+    "OAuth.AspNet.Tokens": "1.0.0-rc0-0001"
   },
 
   "commands": {

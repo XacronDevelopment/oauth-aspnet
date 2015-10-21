@@ -12,7 +12,7 @@
   "frameworks": {
     "net451": {
       "dependencies": {
-        "Microsoft.AspNet.DataProtection.Extensions": "1.0.0-beta8",
+        "Microsoft.AspNet.DataProtection.Extensions": "1.0.0-rc1-15670",
         "Microsoft.Owin.Security": "3.0.1"
       }
     }
