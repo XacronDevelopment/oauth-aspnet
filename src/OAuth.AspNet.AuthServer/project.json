@@ -8,11 +8,11 @@
   "requireLicenseAcceptance": true,
 
   "dependencies": {
-    "Microsoft.AspNet.Authentication": "1.0.0-rc1-15760",
-    "Microsoft.AspNet.DataProtection": "1.0.0-rc1-15670",
-    "Microsoft.AspNet.DataProtection.Extensions": "1.0.0-rc1-15670",
-    "Microsoft.AspNet.Http.Abstractions": "1.0.0-rc1-15796",
-    "Newtonsoft.Json": "7.0.1"
+    "Microsoft.AspNet.Authentication": "1.0.0-rc1-final",
+    "Microsoft.AspNet.DataProtection": "1.0.0-rc1-final",
+    "Microsoft.AspNet.DataProtection.Extensions": "1.0.0-rc1-final",
+    "Microsoft.AspNet.Http.Abstractions": "1.0.0-rc1-final",
+    "Newtonsoft.Json": "8.0.2"
   },
 
   "frameworks": {

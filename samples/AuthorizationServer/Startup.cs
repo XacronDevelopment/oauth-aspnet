@@ -24,7 +24,7 @@ namespace AuthorizationServer
             app.UseCookieAuthentication(
                                            options => {
                                                           options.AuthenticationScheme = "Application";
-                                                          options.AutomaticAuthentication = false;
+                                                          options.AutomaticAuthenticate = false;
                                                           options.LoginPath = new PathString(Paths.LoginPath);
                                                           options.LogoutPath = new PathString(Paths.LogoutPath);
                                                       }
@@ -33,7 +33,7 @@ namespace AuthorizationServer
             app.UseCookieAuthentication(
                                            options => {
                                                           options.AuthenticationScheme = "External";
-                                                          options.AutomaticAuthentication = false;
+                                                          options.AutomaticAuthenticate = false;
                                                           options.CookieName = CookieAuthenticationDefaults.CookiePrefix + options.AuthenticationScheme;
                                                           options.ExpireTimeSpan = TimeSpan.FromMinutes(5);
                                                       }
@@ -45,7 +45,7 @@ namespace AuthorizationServer
                                                           options.ClientId = "309638599461-a673etlplktupuk18bo12bfljgfo4tad.apps.googleusercontent.com";
                                                           options.ClientSecret = "YQYDFkClqu6wiSCKukaQqdfW";
                                                           options.SignInScheme = "External";
-                                                          options.AutomaticAuthentication = false;
+                                                          options.AutomaticAuthenticate = false;
                                                       }
                                        );
 
@@ -80,7 +80,7 @@ namespace AuthorizationServer
                                                                                                  OnReceive = ReceiveRefreshToken,
                                                                                              };
 
-                                                              options.AutomaticAuthentication = false;
+                                                              options.AutomaticAuthenticate = false;
                                                           }
                                            );         
 

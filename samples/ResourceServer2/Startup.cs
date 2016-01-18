@@ -21,7 +21,7 @@ namespace ResourceServer2
                                                 options =>
                                                 {
                                                     options.AuthenticationScheme = JwtBearerDefaults.AuthenticationScheme;
-                                                    options.AutomaticAuthentication = true;
+                                                    options.AutomaticAuthenticate = true;
                                                     options.SecurityTokenValidators.Clear();
                                                     options.SecurityTokenValidators.Add(new TicketDataFormatTokenValidator());
                                                 }

@@ -8,9 +8,9 @@
   "requireLicenseAcceptance": true,
 
   "dependencies": {
-    "Microsoft.AspNet.Authentication": "1.0.0-rc1-15760",
-    "Microsoft.AspNet.DataProtection.Extensions": "1.0.0-rc1-15670",
-    "System.IdentityModel.Tokens": "5.0.0-beta8-209291029"
+    "Microsoft.AspNet.Authentication": "1.0.0-rc1-final",
+    "Microsoft.AspNet.DataProtection.Extensions": "1.0.0-rc1-final",
+    "System.IdentityModel.Tokens": "5.0.0-rc1-211161024"
   },
 
   "frameworks": {

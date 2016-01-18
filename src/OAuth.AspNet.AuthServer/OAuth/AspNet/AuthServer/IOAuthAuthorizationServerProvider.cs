@@ -17,7 +17,7 @@ namespace OAuth.AspNet.AuthServer
         /// </summary>
         /// <param name="context">The context of the event carries information in and results out.</param>
         /// <returns>Task to enable asynchronous execution</returns>
-        Task MatchEndpoint(OAuthMatchEndpointNotification context);
+        Task MatchEndpoint(OAuthMatchContext context);
 
         /// <summary>
         /// Called to validate that the context.ClientId is a registered "client_id", and that the context.RedirectUri a "redirect_uri" 

@@ -37,7 +37,7 @@ namespace OAuth.AspNet.AuthServer
 
             try
             {
-                stream =  memoryStream = new MemoryStream();
+                stream = memoryStream = new MemoryStream();
 
                 streamWriter = new StreamWriter(memoryStream);
 
@@ -534,7 +534,7 @@ namespace OAuth.AspNet.AuthServer
 
             try
             {
-                stream = memoryStream = new MemoryStream();                
+                stream = memoryStream = new MemoryStream();
 
                 using (var writer = new JsonTextWriter(new StreamWriter(memoryStream)))
                 {
@@ -620,18 +620,19 @@ namespace OAuth.AspNet.AuthServer
             }
         }
 
-        protected override Task<AuthenticationTicket> HandleAuthenticateAsync()
+
+        protected override Task<AuthenticateResult> HandleAuthenticateAsync()
         {
-            return Task.FromResult<AuthenticationTicket>(null);
+            return Task.FromResult<AuthenticateResult>(null);
         }
 
         #endregion
 
-        #region Public Members
+        #region Public Members       
 
-        public override async Task<bool> InvokeAsync()
+        public override async Task<bool> HandleRequestAsync()
         {
-            var matchRequestContext = new OAuthMatchEndpointNotification(Context, Options);
+            var matchRequestContext = new OAuthMatchContext(Context, Options);
 
             if (Options.AuthorizeEndpointPath.HasValue && Options.AuthorizeEndpointPath == Request.Path)
             {

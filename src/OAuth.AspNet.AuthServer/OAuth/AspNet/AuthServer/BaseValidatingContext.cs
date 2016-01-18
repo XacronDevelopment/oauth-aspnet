@@ -7,12 +7,20 @@ namespace OAuth.AspNet.AuthServer
     /// <summary>
     /// Base class used for certain event contexts
     /// </summary>
-    public abstract class BaseValidatingContext<TOptions> : BaseContext<TOptions>
+    public abstract class BaseValidatingContext<TOptions> : BaseContext
     {
         /// <summary>
         /// Initializes base class used for certain event contexts
         /// </summary>
-        protected BaseValidatingContext(HttpContext context, TOptions options) : base(context, options) { }
+        protected BaseValidatingContext(HttpContext context, TOptions options) : base(context)
+        {
+            Options = options;
+        }
+
+        /// <summary>
+        /// The context options.
+        /// </summary>
+        public TOptions Options { get; private set; }        
 
         /// <summary>
         /// True if application code has called any of the Validate methods on this context.
