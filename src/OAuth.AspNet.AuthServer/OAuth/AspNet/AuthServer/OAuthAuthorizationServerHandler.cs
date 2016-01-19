@@ -1,16 +1,16 @@
-﻿using System;
+﻿using Microsoft.AspNet.Authentication;
+using Microsoft.AspNet.Http;
+using Microsoft.AspNet.Http.Authentication;
+using Microsoft.AspNet.Http.Features.Authentication;
+using Microsoft.AspNet.WebUtilities;
+using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Text;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Microsoft.AspNet.Authentication;
-using Microsoft.Framework.Logging;
-using Microsoft.AspNet.Http;
-using Microsoft.AspNet.WebUtilities;
-using Microsoft.AspNet.Http.Features.Authentication;
-using System.Collections.Generic;
-using Microsoft.AspNet.Http.Authentication;
 
 namespace OAuth.AspNet.AuthServer
 {
@@ -37,7 +37,7 @@ namespace OAuth.AspNet.AuthServer
 
             try
             {
-                stream =  memoryStream = new MemoryStream();
+                stream = memoryStream = new MemoryStream();
 
                 streamWriter = new StreamWriter(memoryStream);
 
@@ -534,7 +534,7 @@ namespace OAuth.AspNet.AuthServer
 
             try
             {
-                stream = memoryStream = new MemoryStream();                
+                stream = memoryStream = new MemoryStream();
 
                 using (var writer = new JsonTextWriter(new StreamWriter(memoryStream)))
                 {
@@ -620,18 +620,19 @@ namespace OAuth.AspNet.AuthServer
             }
         }
 
-        protected override Task<AuthenticationTicket> HandleAuthenticateAsync()
+
+        protected override Task<AuthenticateResult> HandleAuthenticateAsync()
         {
-            return Task.FromResult<AuthenticationTicket>(null);
+            return Task.FromResult<AuthenticateResult>(null);
         }
 
         #endregion
 
-        #region Public Members
+        #region Public Members       
 
-        public override async Task<bool> InvokeAsync()
+        public override async Task<bool> HandleRequestAsync()
         {
-            var matchRequestContext = new OAuthMatchEndpointNotification(Context, Options);
+            var matchRequestContext = new OAuthMatchContext(Context, Options);
 
             if (Options.AuthorizeEndpointPath.HasValue && Options.AuthorizeEndpointPath == Request.Path)
             {

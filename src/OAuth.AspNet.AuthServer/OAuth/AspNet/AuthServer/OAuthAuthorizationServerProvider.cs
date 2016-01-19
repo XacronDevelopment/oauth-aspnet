@@ -44,7 +44,7 @@ namespace OAuth.AspNet.AuthServer
         /// are assigned values, then handling this event is optional and context.IsAuthorizeEndpoint and context.IsTokenEndpoint
         /// will already be true if the request path matches.
         /// </summary>
-        public Func<OAuthMatchEndpointNotification, Task> OnMatchEndpoint { get; set; }
+        public Func<OAuthMatchContext, Task> OnMatchEndpoint { get; set; }
 
         /// <summary>
         /// Called to validate that the context.ClientId is a registered "client_id", and that the context.RedirectUri a "redirect_uri" 
@@ -181,7 +181,7 @@ namespace OAuth.AspNet.AuthServer
         /// </summary>
         /// <param name="context">The context of the event carries information in and results out.</param>
         /// <returns>Task to enable asynchronous execution</returns>
-        public virtual Task MatchEndpoint(OAuthMatchEndpointNotification context)
+        public virtual Task MatchEndpoint(OAuthMatchContext context)
         {
             return OnMatchEndpoint.Invoke(context);
         }

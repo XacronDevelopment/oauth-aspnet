@@ -4,12 +4,12 @@
 
   "dependencies": {
     "Constants": "1.0.0-*",
-    "Microsoft.AspNet.Authentication.Cookies": "1.0.0-beta8",
-    "Microsoft.AspNet.Authentication.Google": "1.0.0-beta8",
-    "Microsoft.AspNet.IISPlatformHandler": "1.0.0-beta8",
-    "Microsoft.AspNet.Mvc": "6.0.0-beta8",
-    "Microsoft.AspNet.Server.Kestrel": "1.0.0-beta8",
-    "OAuth.AspNet.AuthServer": "1.0.0-beta8-0001"
+    "Microsoft.AspNet.Authentication.Cookies": "1.0.0-rc1-final",
+    "Microsoft.AspNet.Authentication.Google": "1.0.0-rc1-final",
+    "Microsoft.AspNet.IISPlatformHandler": "1.0.0-rc1-final",
+    "Microsoft.AspNet.Mvc": "6.0.0-rc1-final",
+    "Microsoft.AspNet.Server.Kestrel": "1.0.0-rc1-final",
+    "OAuth.AspNet.AuthServer": "1.0.0-rc0-0001"
   },
 
     "commands": {

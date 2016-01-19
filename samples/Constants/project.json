@@ -4,7 +4,7 @@
   "authors": ["Xacron Development"],
 
   "dependencies": {
-    "Microsoft.CSharp": "4.0.1-beta-23225"
+    "Microsoft.CSharp": "4.0.1-beta-23516"
   },
 
   "frameworks": {
