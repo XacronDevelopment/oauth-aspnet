@@ -8,7 +8,7 @@ namespace OAuth.AspNet.AuthServer
     /// An event raised after the Authorization Server has processed the request, but before it is passed on to the web application.
     /// Calling RequestCompleted will prevent the request from passing on to the web application.
     /// </summary>
-    public class OAuthAuthorizeEndpointContext : BaseContext<OAuthAuthorizationServerOptions>
+    public class OAuthAuthorizeEndpointContext : BaseOAuthEndpointContext
     {
         /// <summary>
         /// Creates an instance of this context

@@ -1,5 +1,6 @@
 using Microsoft.AspNet.Authentication;
 using Microsoft.AspNet.Http;
+using System;
 
 namespace OAuth.AspNet.AuthServer
 {
@@ -7,14 +8,28 @@ namespace OAuth.AspNet.AuthServer
     /// <summary>
     /// Provides notification used for determining the OAuth flow type based on the request.
     /// </summary>
-    public class OAuthMatchEndpointNotification : BaseControlContext<OAuthAuthorizationServerOptions>
+    public class OAuthMatchContext : BaseControlContext
     {
+        #region Constructors
+
         /// <summary>
-        /// Initializes a new instance of the <see cref="OAuthMatchEndpointNotification"/> class
+        /// Initializes a new instance of the <see cref="OAuthMatchContext"/> class
         /// </summary>
         /// <param name="context"></param>
         /// <param name="options"></param>
-        public OAuthMatchEndpointNotification(HttpContext context, OAuthAuthorizationServerOptions options) : base(context, options) { }
+        public OAuthMatchContext(HttpContext context, OAuthAuthorizationServerOptions options) : base(context)
+        {
+            if (options == null)
+                throw new ArgumentNullException(nameof(options));
+
+            Options = options;
+        }
+
+        #endregion
+
+        #region Public Members
+
+        public OAuthAuthorizationServerOptions Options { get; }
 
         /// <summary>
         /// Gets whether or not the endpoint is an OAuth authorize endpoint.
@@ -52,6 +67,8 @@ namespace OAuth.AspNet.AuthServer
             IsAuthorizeEndpoint = false;
             IsTokenEndpoint = false;
         }
+
+        #endregion
     }
 
 }
