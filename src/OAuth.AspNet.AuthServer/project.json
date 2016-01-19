@@ -1,5 +1,5 @@
 {
-  "version": "1.0.0-rc0-0001",
+  "version": "1.0.0-rc1-0001",
   "description": "An ASP.NET 5 compatible port of the OAuth Authorization Server middleware from Microsoft's Project Katana.",
   "authors": ["Xacron Development"],
   "tags": ["OAuth", "ASP.NET", "Identity", "AuthServer"],
