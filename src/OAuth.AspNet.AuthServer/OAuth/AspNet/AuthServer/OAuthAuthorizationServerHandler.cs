@@ -1,14 +1,16 @@
-﻿using Microsoft.AspNet.Authentication;
-using Microsoft.AspNet.Http;
-using Microsoft.AspNet.Http.Authentication;
-using Microsoft.AspNet.Http.Features.Authentication;
-using Microsoft.AspNet.WebUtilities;
+﻿using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.Authentication;
+using Microsoft.AspNetCore.Http.Features.Authentication;
+using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Primitives;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -367,7 +369,7 @@ namespace OAuth.AspNet.AuthServer
 
             if (!clientContext.IsValidated)
             {
-                Logger.LogVerbose("Unable to validate client information");
+                Logger.LogInformation("Unable to validate client information");
 
                 return await SendErrorRedirectAsync(clientContext, clientContext);
             }
@@ -376,13 +378,13 @@ namespace OAuth.AspNet.AuthServer
 
             if (string.IsNullOrEmpty(authorizeRequest.ResponseType))
             {
-                Logger.LogVerbose("Authorize endpoint request missing required response_type parameter");
+                Logger.LogInformation("Authorize endpoint request missing required response_type parameter");
 
                 validatingContext.SetError(Constants.Errors.InvalidRequest);
             }
             else if (!authorizeRequest.IsAuthorizationCodeGrantType && !authorizeRequest.IsImplicitGrantType)
             {
-                Logger.LogVerbose("Authorize endpoint request contains unsupported response_type parameter");
+                Logger.LogInformation("Authorize endpoint request contains unsupported response_type parameter");
 
                 validatingContext.SetError(Constants.Errors.UnsupportedResponseType);
             }
@@ -415,9 +417,11 @@ namespace OAuth.AspNet.AuthServer
             // remove milliseconds in case they don't round-trip
             currentUtc = currentUtc.Subtract(TimeSpan.FromMilliseconds(currentUtc.Millisecond));
 
-            IFormCollection form = await Request.ReadFormAsync();
+            var form = await Request.ReadFormAsync();
 
-            var clientContext = new OAuthValidateClientAuthenticationContext(Context, Options, form);
+            IDictionary<string, StringValues> fields = form.ToDictionary(keyValuePair => keyValuePair.Key, keyValuePair => keyValuePair.Value);
+
+            var clientContext = new OAuthValidateClientAuthenticationContext(Context, Options, fields);
 
             await Options.Provider.ValidateClientAuthentication(clientContext);
 
@@ -433,7 +437,7 @@ namespace OAuth.AspNet.AuthServer
                 return;
             }
 
-            var tokenEndpointRequest = new TokenEndpointRequest(form);
+            var tokenEndpointRequest = new TokenEndpointRequest(fields);
 
             var validatingContext = new OAuthValidateTokenRequestContext(Context, Options, tokenEndpointRequest, clientContext);
 

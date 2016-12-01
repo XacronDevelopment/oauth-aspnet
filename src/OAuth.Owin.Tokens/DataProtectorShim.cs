@@ -8,9 +8,9 @@ namespace OAuth.Owin.Tokens
     /// </summary>
     internal sealed class DataProtectorShim : Microsoft.Owin.Security.DataProtection.IDataProtector
     {
-        private readonly Microsoft.AspNet.DataProtection.IDataProtector _protector;
+        private readonly Microsoft.AspNetCore.DataProtection.IDataProtector _protector;
 
-        public DataProtectorShim(Microsoft.AspNet.DataProtection.IDataProtector protector)
+        public DataProtectorShim(Microsoft.AspNetCore.DataProtection.IDataProtector protector)
         {
             if (protector == null)
                 throw new ArgumentNullException(nameof(protector));

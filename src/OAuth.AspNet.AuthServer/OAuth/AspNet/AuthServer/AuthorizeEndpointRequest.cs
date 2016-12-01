@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNet.Http;
+﻿using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
@@ -15,7 +15,7 @@ namespace OAuth.AspNet.AuthServer
         /// Creates a new instance populated with values from the query string parameters.
         /// </summary>
         /// <param name="parameters">Query string parameters from a request.</param>
-        public AuthorizeEndpointRequest(IReadableStringCollection parameters)
+        public AuthorizeEndpointRequest(IQueryCollection parameters)
         {
             if (parameters == null)
             {

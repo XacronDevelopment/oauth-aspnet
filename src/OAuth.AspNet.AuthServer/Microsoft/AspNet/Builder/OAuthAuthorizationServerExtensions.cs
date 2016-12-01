@@ -1,8 +1,7 @@
 using System;
-using Microsoft.AspNet.Builder;
 using OAuth.AspNet.AuthServer;
 
-namespace Microsoft.AspNet.Builder
+namespace Microsoft.AspNetCore.Builder
 {
 
     /// <summary>

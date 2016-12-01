@@ -1,4 +1,4 @@
-using Microsoft.AspNet.Http;
+using Microsoft.AspNetCore.Http;
 using System.Collections.Generic;
 
 namespace OAuth.AspNet.AuthServer

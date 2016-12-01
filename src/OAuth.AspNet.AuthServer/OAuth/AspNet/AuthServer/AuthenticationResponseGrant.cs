@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNet.Http.Authentication;
+﻿using Microsoft.AspNetCore.Http.Authentication;
 using System;
 using System.Linq;
 using System.Security.Claims;
