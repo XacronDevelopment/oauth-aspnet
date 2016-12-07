@@ -16,7 +16,7 @@ namespace Constants
         /// <summary>
         /// ImplicitGrant project should be running on this URL
         /// </summary>
-        public const string ImplicitGrantCallBackPath = "http://localhost:9581/Home/SignIn";
+        public const string ImplicitGrantCallBackPath = "http://localhost:9500/Home/SignIn";
 
         /// <summary>
         /// AuthorizationCodeGrant project should be running on this URL.

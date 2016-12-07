@@ -1,11 +1,11 @@
 ﻿using Constants;
+using OAuth.AspNet.AuthServer;
 using System;
 using System.Collections.Concurrent;
 using System.Linq;
 using System.Security.Claims;
 using System.Security.Principal;
 using System.Threading.Tasks;
-using OAuth.AspNet.AuthServer;
 
 namespace AuthorizationServer
 {
