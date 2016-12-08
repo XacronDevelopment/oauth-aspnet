@@ -1,31 +1,40 @@
-﻿using Microsoft.AspNet.Authentication.JwtBearer;
-using Microsoft.AspNet.Builder;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using OAuth.AspNet.Tokens;
 
 namespace ResourceServer2
 {
     public class Startup
     {
+        // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit http://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
         }
 
-        public void Configure(IApplicationBuilder app)
+        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
-            app.UseIISPlatformHandler();
+            loggerFactory.AddConsole();
 
-            app.UseJwtBearerAuthentication(
-                                                options =>
-                                                {
-                                                    options.AuthenticationScheme = JwtBearerDefaults.AuthenticationScheme;
-                                                    options.AutomaticAuthenticate = true;
-                                                    options.SecurityTokenValidators.Clear();
-                                                    options.SecurityTokenValidators.Add(new TicketDataFormatTokenValidator());
-                                                }
-                                            );
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+            }
+
+            var jwtBearerOptions = new JwtBearerOptions
+                                   {
+                                       AuthenticationScheme = JwtBearerDefaults.AuthenticationScheme,
+                                       AutomaticAuthenticate = true
+                                   };
+            jwtBearerOptions.SecurityTokenValidators.Clear();
+            jwtBearerOptions.SecurityTokenValidators.Add(new TicketDataFormatTokenValidator());
+
+            app.UseJwtBearerAuthentication(jwtBearerOptions);
 
             app.UseMvc(
                           routes =>
