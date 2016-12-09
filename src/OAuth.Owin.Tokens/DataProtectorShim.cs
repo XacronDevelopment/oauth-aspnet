@@ -4,7 +4,7 @@ namespace OAuth.Owin.Tokens
 {
 
     /// <summary>
-    /// Converts a <see cref="Microsoft.AspNet.DataProtection.IDataProtector"/> to a <see cref="Microsoft.Owin.Security.DataProtection.IDataProtector"/>.
+    /// Converts a <see cref="Microsoft.AspNetCore.DataProtection.IDataProtector"/> to a <see cref="Microsoft.Owin.Security.DataProtection.IDataProtector"/>.
     /// </summary>
     internal sealed class DataProtectorShim : Microsoft.Owin.Security.DataProtection.IDataProtector
     {

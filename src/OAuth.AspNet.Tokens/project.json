@@ -12,17 +12,23 @@
     },
     "requireLicenseAcceptance": true
   },
-
   "dependencies": {
     "Microsoft.AspNetCore.Authentication": "1.1.0",
     "Microsoft.AspNetCore.DataProtection.Extensions": "1.1.0",
     "Microsoft.IdentityModel.Tokens": "5.1.0",
     "NETStandard.Library": "1.6.1"
   },
-
   "frameworks": {
     "netstandard1.6": {
       "imports": "dnxcore50"
     }
+  },
+  "scripts": {
+    "postcompile": [
+      "dotnet pack --no-build --configuration %compile:Configuration%"
+    ]
+  },
+  "buildOptions": {
+    "xmlDoc": true
   }
 }
