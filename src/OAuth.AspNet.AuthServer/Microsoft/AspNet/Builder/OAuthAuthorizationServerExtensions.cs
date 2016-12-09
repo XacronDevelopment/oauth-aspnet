@@ -1,8 +1,8 @@
-using System;
-using Microsoft.AspNet.Builder;
+using Microsoft.Extensions.Options;
 using OAuth.AspNet.AuthServer;
+using System;
 
-namespace Microsoft.AspNet.Builder
+namespace Microsoft.AspNetCore.Builder
 {
 
     /// <summary>
@@ -26,7 +26,7 @@ namespace Microsoft.AspNet.Builder
             if (options == null)
                 throw new ArgumentNullException(nameof(options));
 
-            return app.UseMiddleware<OAuthAuthorizationServerMiddleware>(options);
+            return app.UseMiddleware<OAuthAuthorizationServerMiddleware>(Options.Create(options));
         }
 
 
@@ -49,7 +49,6 @@ namespace Microsoft.AspNet.Builder
 
             var options = new OAuthAuthorizationServerOptions();
             if (configureOptions != null)
-
                 configureOptions(options);
 
             return app.UseOAuthAuthorizationServer(options);

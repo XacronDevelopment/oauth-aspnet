@@ -1,5 +1,6 @@
-﻿using Microsoft.AspNet.Http;
+﻿using Microsoft.Extensions.Primitives;
 using System;
+using System.Collections.Generic;
 
 namespace OAuth.AspNet.AuthServer
 {
@@ -13,7 +14,7 @@ namespace OAuth.AspNet.AuthServer
         /// Creates a new instance populated with values from the form encoded body parameters.
         /// </summary>
         /// <param name="parameters">Form encoded body parameters from a request.</param>
-        public TokenEndpointRequest(IReadableStringCollection parameters)
+        public TokenEndpointRequest(IDictionary<string, StringValues> parameters)
         {
             if (parameters == null)
             {
@@ -21,38 +22,69 @@ namespace OAuth.AspNet.AuthServer
             }
 
             Parameters = parameters;
-            GrantType = parameters[Constants.Parameters.GrantType];
-            ClientId = parameters[Constants.Parameters.ClientId];
+
+            StringValues grantTypeValue;
+            parameters.TryGetValue(Constants.Parameters.GrantType, out grantTypeValue);
+            GrantType = grantTypeValue;
+
+            StringValues clientIdValue;
+            parameters.TryGetValue(Constants.Parameters.ClientId, out clientIdValue);
+            ClientId = clientIdValue;
+
             if (string.Equals(GrantType, Constants.GrantTypes.AuthorizationCode, StringComparison.Ordinal))
             {
+                StringValues codeValue;
+                parameters.TryGetValue(Constants.Parameters.Code, out codeValue);
+
+                StringValues redirectUrlValue;
+                parameters.TryGetValue(Constants.Parameters.RedirectUri, out redirectUrlValue);
+
                 AuthorizationCodeGrant = new TokenEndpointRequestAuthorizationCode
                 {
-                    Code = parameters[Constants.Parameters.Code],
-                    RedirectUri = parameters[Constants.Parameters.RedirectUri],
+                    Code = codeValue,
+                    RedirectUri = redirectUrlValue
                 };
             }
             else if (string.Equals(GrantType, Constants.GrantTypes.ClientCredentials, StringComparison.Ordinal))
             {
+                StringValues scopeValue;
+                parameters.TryGetValue(Constants.Parameters.Scope, out scopeValue);
+
                 ClientCredentialsGrant = new TokenEndpointRequestClientCredentials
                 {
-                    Scope = ((string)parameters[Constants.Parameters.Scope] ?? string.Empty).Split(' ')
+                    Scope = ((string)scopeValue ?? string.Empty).Split(' ')
                 };
             }
             else if (string.Equals(GrantType, Constants.GrantTypes.RefreshToken, StringComparison.Ordinal))
             {
+                StringValues refreshTokenValue;
+                parameters.TryGetValue(Constants.Parameters.RefreshToken, out refreshTokenValue);
+
+                StringValues scopeValue;
+                parameters.TryGetValue(Constants.Parameters.Scope, out scopeValue);
+
                 RefreshTokenGrant = new TokenEndpointRequestRefreshToken
                 {
-                    RefreshToken = parameters[Constants.Parameters.RefreshToken],
-                    Scope = ((string)parameters[Constants.Parameters.Scope] ?? string.Empty).Split(' ')
+                    RefreshToken = refreshTokenValue,
+                    Scope = ((string)scopeValue ?? string.Empty).Split(' ')
                 };
             }
             else if (string.Equals(GrantType, Constants.GrantTypes.Password, StringComparison.Ordinal))
             {
+                StringValues usernameValue;
+                parameters.TryGetValue(Constants.Parameters.Username, out usernameValue);
+
+                StringValues passwordValue;
+                parameters.TryGetValue(Constants.Parameters.Scope, out passwordValue);
+
+                StringValues scopeValue;
+                parameters.TryGetValue(Constants.Parameters.Scope, out scopeValue);
+
                 ResourceOwnerPasswordCredentialsGrant = new TokenEndpointRequestResourceOwnerPasswordCredentials
                 {
-                    UserName = parameters[Constants.Parameters.Username],
-                    Password = parameters[Constants.Parameters.Password],
-                    Scope = ((string)parameters[Constants.Parameters.Scope] ?? string.Empty).Split(' ')
+                    UserName = usernameValue,
+                    Password = passwordValue,
+                    Scope = ((string)scopeValue ?? string.Empty).Split(' ')
                 };
             }
             else if (!string.IsNullOrEmpty(GrantType))
@@ -67,7 +99,7 @@ namespace OAuth.AspNet.AuthServer
         /// <summary>
         /// The form encoded body parameters of the Token endpoint request
         /// </summary>
-        public IReadableStringCollection Parameters { get; private set; }
+        public IDictionary<string, StringValues> Parameters { get; private set; }
 
         /// <summary>
         /// The "grant_type" parameter of the Token endpoint request. This parameter is required.

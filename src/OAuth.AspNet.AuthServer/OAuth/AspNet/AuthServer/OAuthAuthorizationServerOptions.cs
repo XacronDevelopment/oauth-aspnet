@@ -1,6 +1,7 @@
-using Microsoft.AspNet.Authentication;
-using Microsoft.AspNet.DataProtection;
-using Microsoft.AspNet.Http;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.DataProtection;
+using Microsoft.AspNetCore.Http;
 using System;
 
 namespace OAuth.AspNet.AuthServer
@@ -113,12 +114,6 @@ namespace OAuth.AspNet.AuthServer
         /// /Authorize endpoint should expect to see "oauth.Error", "oauth.ErrorDescription", "oauth.ErrorUri" properties added to the owin environment.
         /// </summary>
         public bool ApplicationCanDisplayErrors { get; set; }
-
-        /// <summary>
-        /// Used to know what the current clock time is when calculating or validating token expiration. When not assigned default is based on
-        /// DateTimeOffset.UtcNow. This is typically needed only for unit testing.
-        /// </summary>
-        public ISystemClock SystemClock { get; set; }
 
         /// <summary>
         /// True to allow authorize and token requests to arrive on http URI addresses, and to allow incoming 

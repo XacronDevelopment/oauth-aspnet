@@ -1,5 +1,5 @@
-using Microsoft.AspNet.Http;
-using Microsoft.AspNet.Authentication;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authentication;
 using System;
 
 namespace OAuth.AspNet.AuthServer

@@ -1,4 +1,6 @@
-using Microsoft.AspNet.Http;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Primitives;
+using System.Collections.Generic;
 
 namespace OAuth.AspNet.AuthServer
 {
@@ -16,7 +18,7 @@ namespace OAuth.AspNet.AuthServer
         /// <param name="clientId"></param>
         /// <param name="grantType"></param>
         /// <param name="parameters"></param>
-        public OAuthGrantCustomExtensionContext(HttpContext context, OAuthAuthorizationServerOptions options, string clientId, string grantType, IReadableStringCollection parameters) : base(context, options, null)
+        public OAuthGrantCustomExtensionContext(HttpContext context, OAuthAuthorizationServerOptions options, string clientId, string grantType, IDictionary<string, StringValues> parameters) : base(context, options, null)
         {
             ClientId = clientId;
             GrantType = grantType;
@@ -36,7 +38,7 @@ namespace OAuth.AspNet.AuthServer
         /// <summary>
         /// Gets a list of additional parameters from the token request.
         /// </summary>
-        public IReadableStringCollection Parameters { get; private set; }
+        public IDictionary<string, StringValues> Parameters { get; private set; }
     }
 
 }

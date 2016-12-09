@@ -1,6 +1,6 @@
-﻿using Microsoft.AspNet.Http.Authentication;
-using Microsoft.AspNet.Mvc;
-using Microsoft.AspNet.WebUtilities;
+﻿using Microsoft.AspNetCore.Http.Authentication;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.WebUtilities;
 using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -47,9 +47,9 @@ namespace AuthorizationServer.Controllers
                         await authentication.ChallengeAsync(authType);
 
                         if (Response.StatusCode == 200)
-                            return new HttpUnauthorizedResult();
+                            return new UnauthorizedResult();
 
-                        return new HttpStatusCodeResult(Response.StatusCode);
+                        return new StatusCodeResult(Response.StatusCode);
                     }
                 }
             }

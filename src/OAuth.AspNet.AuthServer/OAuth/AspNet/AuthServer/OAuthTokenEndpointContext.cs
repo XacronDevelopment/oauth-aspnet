@@ -1,6 +1,6 @@
-using Microsoft.AspNet.Authentication;
-using Microsoft.AspNet.Http;
-using Microsoft.AspNet.Http.Authentication;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.Authentication;
 using System;
 using System.Collections.Generic;
 using System.Security.Claims;
