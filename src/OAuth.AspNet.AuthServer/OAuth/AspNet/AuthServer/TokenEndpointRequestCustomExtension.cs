@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNet.Http;
+﻿using Microsoft.Extensions.Primitives;
+using System.Collections.Generic;
 
 namespace OAuth.AspNet.AuthServer
 {
@@ -11,7 +12,7 @@ namespace OAuth.AspNet.AuthServer
         /// <summary>
         /// The parameter information when the "grant_type" is unrecognized.
         /// </summary>
-        public IReadableStringCollection Parameters { get; set; }
+        public IDictionary<string, StringValues> Parameters { get; set; }
     }
 
 }

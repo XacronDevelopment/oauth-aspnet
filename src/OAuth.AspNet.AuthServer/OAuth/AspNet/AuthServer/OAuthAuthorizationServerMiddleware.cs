@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNet.Authentication;
-using Microsoft.AspNet.Builder;
-using Microsoft.AspNet.DataProtection;
+﻿using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.DataProtection;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.WebEncoders;
+using Microsoft.Extensions.Options;
 using System;
 using System.IO;
+using System.Text.Encodings.Web;
 
 namespace OAuth.AspNet.AuthServer
 {
@@ -21,7 +23,7 @@ namespace OAuth.AspNet.AuthServer
         /// called by application code directly, instead it is added by calling the the IAppBuilder UseOAuthAuthorizationServer 
         /// extension method.
         /// </summary>
-        public OAuthAuthorizationServerMiddleware(RequestDelegate next, OAuthAuthorizationServerOptions options, ILoggerFactory loggerFactory, IDataProtectionProvider dataProtectionProvider, IUrlEncoder encoder) : base(next, options, loggerFactory, encoder)
+        public OAuthAuthorizationServerMiddleware(RequestDelegate next, IOptions<OAuthAuthorizationServerOptions> options, ILoggerFactory loggerFactory, IDataProtectionProvider dataProtectionProvider, UrlEncoder encoder) : base(next, options, loggerFactory, encoder)
         {
             if (Options.Provider == null)
             {
@@ -44,11 +46,7 @@ namespace OAuth.AspNet.AuthServer
 
             if (Options.TokenDataProtector == null)
             {
-               #if DNXCORE50
-                Options.TokenDataProtector = new DataProtectionProvider(new DirectoryInfo(Environment.GetEnvironmentVariable("Temp"))).CreateProtector("OAuth.AspNet.AuthServer");
-               #else
-                Options.TokenDataProtector = new DataProtectionProvider(new DirectoryInfo(Environment.GetEnvironmentVariable("Temp", EnvironmentVariableTarget.Machine))).CreateProtector("OAuth.AspNet.AuthServer");
-               #endif
+                Options.TokenDataProtector = DataProtectionProvider.Create(new DirectoryInfo(Environment.GetEnvironmentVariable("Temp"))).CreateProtector("OAuth.AspNet.AuthServer");
             }
 
             if (Options.AccessTokenFormat == null)

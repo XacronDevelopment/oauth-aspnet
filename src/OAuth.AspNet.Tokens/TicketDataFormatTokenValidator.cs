@@ -1,7 +1,7 @@
-﻿using Microsoft.AspNet.Authentication;
-using Microsoft.AspNet.DataProtection;
+﻿using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.DataProtection;
 using System;
-using System.IdentityModel.Tokens;
+using Microsoft.IdentityModel.Tokens;
 using System.IO;
 using System.Security.Claims;
 using System.Text.RegularExpressions;
@@ -19,11 +19,7 @@ namespace OAuth.AspNet.Tokens
         {
             if (dataProtectionProvider == null)
             {
-               #if DNXCORE50
-                dataProtectionProvider = new DataProtectionProvider(new DirectoryInfo(Environment.GetEnvironmentVariable("Temp"))).CreateProtector("OAuth.AspNet.AuthServer");
-               #else
-                dataProtectionProvider = new DataProtectionProvider(new DirectoryInfo(Environment.GetEnvironmentVariable("Temp", EnvironmentVariableTarget.Machine))).CreateProtector("OAuth.AspNet.AuthServer");
-               #endif
+                dataProtectionProvider = DataProtectionProvider.Create(new DirectoryInfo(Environment.GetEnvironmentVariable("Temp"))).CreateProtector("OAuth.AspNet.AuthServer");
             }
 
             _ticketDataFormat = new TicketDataFormat(dataProtectionProvider.CreateProtector("Access_Token", "v1"));

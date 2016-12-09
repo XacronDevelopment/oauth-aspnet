@@ -11,7 +11,7 @@
     <form id="form1">
         <div>
             Access Token<br />
-            <input id="AccessToken" name="AccessToken" />
+            <input id="AccessToken" name="AccessToken" size="100" />
             <input id="Authorize" type="button" name="signin.AccessToken" value="Authorize" />
             <br />
             <input id="CallApi" name="submit.CallApi" value="Access Protected Resource API" type="button" />
@@ -48,7 +48,7 @@
                     $('#AccessToken').val(data.access_token);
                 }
 
-                window.open(uri, 'Authorize', 'width=640,height=480');
+                window.open(uri, 'Authorize', 'width=800,height=600');
             });
 
             $('#CallApi').click(function () {

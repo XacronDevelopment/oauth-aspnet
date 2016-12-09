@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNet.Http.Authentication;
+﻿using Microsoft.AspNetCore.Http.Authentication;
 
 namespace OAuth.AspNet.AuthServer
 {

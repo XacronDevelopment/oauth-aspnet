@@ -1,8 +1,8 @@
-﻿using Microsoft.AspNet.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Security.Claims;
-using Microsoft.AspNet.WebUtilities;
-using Microsoft.AspNet.Http.Authentication;
+using Microsoft.AspNetCore.WebUtilities;
+using Microsoft.AspNetCore.Http.Authentication;
 using System.Threading.Tasks;
 
 namespace AuthorizationServer.Controllers
@@ -25,9 +25,9 @@ namespace AuthorizationServer.Controllers
                 await authentication.ChallengeAsync("Application");
 
                 if (Response.StatusCode == 200)
-                    return new HttpUnauthorizedResult();
+                    return new UnauthorizedResult();
 
-                return new HttpStatusCodeResult(Response.StatusCode);
+                return new StatusCodeResult(Response.StatusCode);
             }
 
             string[] scopes = { };
@@ -62,7 +62,7 @@ namespace AuthorizationServer.Controllers
 
                     await authentication.ChallengeAsync("Application");
 
-                    return new HttpUnauthorizedResult();
+                    return new UnauthorizedResult();
                 }
             }
 

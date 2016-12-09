@@ -1,22 +1,35 @@
 {
-  "version": "1.0.0-rc1-0001",
+  "version": "1.0.0",
   "description": "An ASP.NET 5 compatible port of the OAuth Authorization Server middleware from Microsoft's Project Katana.",
-  "authors": ["Xacron Development"],
-  "tags": ["OAuth", "ASP.NET", "Identity", "AuthServer"],
-  "projectUrl": "https://github.com/XacronDevelopment/oauth-aspnet",
-  "licenseUrl": "http://opensource.org/licenses/apache2.0.php",
-  "requireLicenseAcceptance": true,
-
-  "dependencies": {
-    "Microsoft.AspNet.Authentication": "1.0.0-rc1-final",
-    "Microsoft.AspNet.DataProtection": "1.0.0-rc1-final",
-    "Microsoft.AspNet.DataProtection.Extensions": "1.0.0-rc1-final",
-    "Microsoft.AspNet.Http.Abstractions": "1.0.0-rc1-final",
-    "Newtonsoft.Json": "8.0.2"
+  "authors": [ "Xacron Development" ],
+  "packOptions": {
+    "tags": [ "OAuth", "ASP.NET", "Identity", "AuthServer" ],
+    "projectUrl": "https://github.com/XacronDevelopment/oauth-aspnet",
+    "licenseUrl": "http://opensource.org/licenses/apache2.0.php",
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/XacronDevelopment/oauth-aspnet.git"
+    },
+    "requireLicenseAcceptance": true
   },
-
+  "dependencies": {
+    "Microsoft.AspNetCore.Authentication": "1.1.0",
+    "Microsoft.AspNetCore.DataProtection": "1.1.0",
+    "Microsoft.AspNetCore.DataProtection.Extensions": "1.1.0",
+    "Microsoft.AspNetCore.Http.Abstractions": "1.1.0",
+    "Newtonsoft.Json": "9.0.1"
+  },
   "frameworks": {
-    "dnx451": { },
-    "dnxcore50": { }
-  }  
+    "netstandard1.6": {
+      "imports": "dnxcore50"
+    }
+  },
+  "buildOptions": {
+    "xmlDoc": true
+  },
+  "scripts": {
+    "postcompile": [
+      "dotnet pack --no-build --configuration %compile:Configuration%"
+    ]
+  }
 }

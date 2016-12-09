@@ -1,5 +1,7 @@
-using Microsoft.AspNet.Http;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Primitives;
 using System;
+using System.Collections.Generic;
 using System.Text;
 
 namespace OAuth.AspNet.AuthServer
@@ -16,7 +18,7 @@ namespace OAuth.AspNet.AuthServer
         /// <param name="context"></param>
         /// <param name="options"></param>
         /// <param name="parameters"></param>
-        public OAuthValidateClientAuthenticationContext(HttpContext context, OAuthAuthorizationServerOptions options, IReadableStringCollection parameters) : base(context, options, null)
+        public OAuthValidateClientAuthenticationContext(HttpContext context, OAuthAuthorizationServerOptions options, IDictionary<string, StringValues> parameters) : base(context, options, null)
         {
             Parameters = parameters;
         }
@@ -24,7 +26,7 @@ namespace OAuth.AspNet.AuthServer
         /// <summary>
         /// Gets the set of form parameters from the request.
         /// </summary>
-        public IReadableStringCollection Parameters { get; private set; }
+        public IDictionary<string, StringValues> Parameters { get; private set; }
 
         /// <summary>
         /// Sets the client id and marks the context as validated by the application.
@@ -89,10 +91,14 @@ namespace OAuth.AspNet.AuthServer
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "0#", Justification = "Optimized for usage")]
         public bool TryGetFormCredentials(out string clientId, out string clientSecret)
         {
-            clientId = Parameters[Constants.Parameters.ClientId];
+            StringValues clientIdValue;
+            Parameters.TryGetValue(Constants.Parameters.ClientId, out clientIdValue);
+            clientId = clientIdValue;
             if (!string.IsNullOrEmpty(clientId))
             {
-                clientSecret = Parameters[Constants.Parameters.ClientSecret];
+                StringValues clientSecretValue;
+                Parameters.TryGetValue(Constants.Parameters.ClientSecret, out clientSecretValue);
+                clientSecret = clientSecretValue;
                 ClientId = clientId;
                 return true;
             }
