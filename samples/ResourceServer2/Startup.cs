@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using OAuth.AspNet.Tokens;
+using Microsoft.AspNetCore.Http;
 
 namespace ResourceServer2
 {
@@ -47,6 +48,13 @@ namespace ResourceServer2
 
                           }
                       );
+
+            app.Run(
+                       async (context) =>
+                       {
+                           await context.Response.WriteAsync("Resource Server 2");
+                       }
+                   );
         }
     }
 }
