@@ -1,0 +1,15 @@
+<Project>
+  <PropertyGroup>
+    <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
+    <Version>1.0.1</Version>
+    <Authors>Xacron Development</Authors>
+    <Company>Xacron Development</Company>
+    <Copyright>Copyright © Xacron Development</Copyright>
+    <PackageLicenseUrl>http://opensource.org/licenses/apache2.0.php</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/XacronDevelopment/oauth-aspnet</PackageProjectUrl>
+    <RepositoryType>git</RepositoryType>
+    <RepositoryUrl>https://github.com/XacronDevelopment/oauth-aspnet.git</RepositoryUrl>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <FileVersion>1.0.0.0</FileVersion>
+  </PropertyGroup>
+</Project>

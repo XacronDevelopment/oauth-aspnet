@@ -1,24 +1,15 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net452</TargetFramework>
     <TargetFramework>net461</TargetFramework>
-    <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
     <Description>ASP.NET 4.x Resource Server components for consuming OAuth tokens genetrated by an Authorization Server based on OAuth.AspNet.AuthServer</Description>
-    <Version>1.0.1</Version>
     <PackageTags>OAuth;OWIN;Tokens;ASP.NET</PackageTags>
-    <PackageLicenseUrl>http://opensource.org/licenses/apache2.0.php</PackageLicenseUrl>
-    <PackageProjectUrl>https://github.com/XacronDevelopment/oauth-aspnet</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/XacronDevelopment/oauth-aspnet.git</RepositoryUrl>
-    <RepositoryType>git</RepositoryType>
-    <Copyright>Copyright © Xacron Development</Copyright>
-    <Authors>Xacron Development</Authors>
-    <Company>Xacron Development</Company>
+    <AssemblyTitle>ASP.NET 4 OAuth Resource Server Components</AssemblyTitle>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.DataProtection.Extensions" Version="1.1.1" />
-    <PackageReference Include="Microsoft.Owin.Security" Version="3.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.DataProtection.Extensions" Version="1.1.2" />
+    <PackageReference Include="Microsoft.Owin.Security" Version="3.1.0" />
   </ItemGroup>
 
 </Project>
