@@ -37,6 +37,11 @@ namespace ResourceServer2
 
             app.UseJwtBearerAuthentication(jwtBearerOptions);
 
+            app.UseCors((policy) =>
+            {
+                policy.AllowAnyHeader().AllowAnyOrigin().AllowCredentials().AllowAnyMethod();
+            });
+
             app.UseMvc(
                           routes =>
                           {

@@ -1,5 +1,4 @@
 ﻿@using Constants
-
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -19,8 +18,7 @@
         <div id="output">
         </div>
     </form>
-
-    <script src="http://ajax.aspnetcdn.com/ajax/jquery/jquery-1.9.0.js"></script>
+    <script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script type="text/javascript">
         (function ($) {
             var authorizeUri = '@(Paths.AuthorizationServerBaseAddress + Paths.AuthorizePath)';
@@ -51,19 +49,22 @@
                 window.open(uri, 'Authorize', 'width=800,height=600');
             });
 
-            $('#CallApi').click(function () {
-                $.ajax(apiUri, {
-                    beforeSend: function (xhr) {
-                        xhr.setRequestHeader('Authorization', 'Bearer ' + $('#AccessToken').val());
-                    },
-                    dataType: 'text',
-                    cache: false,
-                    success: function (data) {
-                        console.log(data);
-                        $('#output').text(data);
-                    }
+            $('#CallApi')
+                .click(function () {
+                    $.ajax({
+                        url: apiUri,
+                        type: 'GET',
+                        beforeSend: function (xhr) {
+                            xhr.setRequestHeader('Authorization', 'Bearer ' + $('#AccessToken').val());
+                        },
+                        dataType: 'text',
+                        cache: false,
+                        success: function (data) {
+                            console.log(data);
+                            $('#output').text(data);
+                        }
+                    });
                 });
-            });
 
             function addQueryString(uri, parameters) {
                 var delimiter = (uri.indexOf('?') == -1) ? '?' : '&';
