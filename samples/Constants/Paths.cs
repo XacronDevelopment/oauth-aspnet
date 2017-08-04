@@ -3,6 +3,25 @@ namespace Constants
 {
     public static class Paths
     {
+        #region non-Public Members
+
+        /// <summary>
+        /// ASP.NET 4.x Resource Server
+        /// </summary>
+        private const string ResourceServer1BaseAddress = "http://localhost:31701";
+        /// <summary>
+        /// ASP.NET Core Resource Server
+        /// </summary>
+        private const string ResourceServer2BaseAddress = "http://localhost:62619";
+        /// <summary>
+        /// OAuth Callback URL for ImplicitGrantClient2
+        /// </summary>
+        private const string ImplicitGrantClient2CallBackPath = "http://localhost:9581/Home/SignIn";
+
+        #endregion
+
+        #region Public Members
+
         /// <summary>
         /// AuthorizationServer project should run on this URL
         /// </summary>
@@ -11,12 +30,12 @@ namespace Constants
         /// <summary>
         /// ResourceServer project should run on this URL
         /// </summary>
-        public const string ResourceServerBaseAddress = "http://localhost:62619";
+        public const string ResourceServerBaseAddress = ResourceServer2BaseAddress;
 
         /// <summary>
         /// ImplicitGrant project should be running on this URL
         /// </summary>
-        public const string ImplicitGrantCallBackPath = "http://localhost:9581/Home/SignIn";
+        public const string ImplicitGrantCallBackPath = ImplicitGrantClient2CallBackPath;
 
         /// <summary>
         /// AuthorizationCodeGrant project should be running on this URL.
@@ -28,5 +47,7 @@ namespace Constants
         public const string LoginPath = "/Account/Login";
         public const string LogoutPath = "/Account/Logout";
         public const string MePath = "/api/Me";
+
+        #endregion
     }
 }
