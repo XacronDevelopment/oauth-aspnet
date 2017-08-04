@@ -9,14 +9,21 @@ namespace Constants
         /// ASP.NET 4.x Resource Server
         /// </summary>
         private const string ResourceServer1BaseAddress = "http://localhost:31701";
+
         /// <summary>
         /// ASP.NET Core Resource Server
         /// </summary>
         private const string ResourceServer2BaseAddress = "http://localhost:62619";
+
         /// <summary>
-        /// OAuth Callback URL for ImplicitGrantClient2
+        /// OAuth Callback URL for ASP.NET Core Implicit Grant Client
         /// </summary>
         private const string ImplicitGrantClient2CallBackPath = "http://localhost:9581/Home/SignIn";
+
+        /// <summary>
+        /// OAuth Callback URL for ASP.NET Core Implicit Grant Client
+        /// </summary>
+        private const string ImplicitGrantClient1CallBackPath = "http://localhost:9500/Home/SignIn";
 
         #endregion
 
