@@ -5,6 +5,7 @@
     <Description>ASP.NET 4.x Resource Server components for consuming OAuth tokens genetrated by an Authorization Server based on OAuth.AspNet.AuthServer</Description>
     <PackageTags>OAuth;OWIN;Tokens;ASP.NET</PackageTags>
     <AssemblyTitle>ASP.NET 4 OAuth Resource Server Components</AssemblyTitle>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <ItemGroup>

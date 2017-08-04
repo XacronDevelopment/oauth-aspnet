@@ -5,6 +5,7 @@
     <Description>Resource Server components for consuming OAuth tokens genetrated by an Authorization Server based on OAuth.AspNet.AuthServer</Description>
     <PackageTags>OAuth;Tokens;ASP.NET</PackageTags>
     <AssemblyTitle>OAuth Resource Server Components</AssemblyTitle>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <ItemGroup>

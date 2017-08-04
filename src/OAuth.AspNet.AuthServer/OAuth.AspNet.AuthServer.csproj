@@ -2,9 +2,10 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard1.4</TargetFramework>
-    <Description>An ASP.NET Core compatible port of the OAuth Authorization Server middleware from Microsoft's Project Katana.</Description>    
+    <Description>An ASP.NET Core compatible port of the OAuth Authorization Server middleware from Microsoft's Project Katana.</Description>
     <PackageTags>OAuth;ASP.NET;Identity;AuthServer</PackageTags>
     <AssemblyTitle>ASP.NET Core OAuth Authorization Server</AssemblyTitle>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <ItemGroup>

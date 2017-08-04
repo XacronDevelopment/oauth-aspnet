@@ -30,6 +30,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ResourceServer1", "samples\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImplicitGrantClient1", "samples\ImplicitGrantClient1\ImplicitGrantClient1.csproj", "{ED5DB95D-F984-4AFC-A868-E6BFB79EFDE7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuthorizationCodeGrantClient1", "samples\AuthorizationCodeGrantClient1\AuthorizationCodeGrantClient1.csproj", "{B4AFDEB8-8B3A-4A7A-9D77-08D22E113412}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -72,6 +74,10 @@ Global
 		{ED5DB95D-F984-4AFC-A868-E6BFB79EFDE7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ED5DB95D-F984-4AFC-A868-E6BFB79EFDE7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ED5DB95D-F984-4AFC-A868-E6BFB79EFDE7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B4AFDEB8-8B3A-4A7A-9D77-08D22E113412}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B4AFDEB8-8B3A-4A7A-9D77-08D22E113412}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B4AFDEB8-8B3A-4A7A-9D77-08D22E113412}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B4AFDEB8-8B3A-4A7A-9D77-08D22E113412}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -86,5 +92,6 @@ Global
 		{09F96A9F-7C05-4DB5-9A2B-02B9FF3B5F84} = {B7E89BF1-5B45-4975-88F3-F13DFF262FF9}
 		{0A252844-C627-4BA8-940D-633E621CD1F8} = {B7E89BF1-5B45-4975-88F3-F13DFF262FF9}
 		{ED5DB95D-F984-4AFC-A868-E6BFB79EFDE7} = {B7E89BF1-5B45-4975-88F3-F13DFF262FF9}
+		{B4AFDEB8-8B3A-4A7A-9D77-08D22E113412} = {B7E89BF1-5B45-4975-88F3-F13DFF262FF9}
 	EndGlobalSection
 EndGlobal
