@@ -75,7 +75,7 @@ namespace OAuth.AspNet.AuthServer
                 parameters.TryGetValue(Constants.Parameters.Username, out usernameValue);
 
                 StringValues passwordValue;
-                parameters.TryGetValue(Constants.Parameters.Scope, out passwordValue);
+                parameters.TryGetValue(Constants.Parameters.Password, out passwordValue);
 
                 StringValues scopeValue;
                 parameters.TryGetValue(Constants.Parameters.Scope, out scopeValue);
